@@ -1,7 +1,10 @@
+import Header from "../../components/Header/Header";
+
 const RegisrationPage = () => {
   return (
     <>
-      <p>Regisration Page</p>
+      <Header />
+      <main></main>
     </>
   );
 };

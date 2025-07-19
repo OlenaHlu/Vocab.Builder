@@ -1,0 +1,57 @@
+.headerContainer {
+  max-width: 375px;
+  padding: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+}
+
+.icon {
+  width: 36px;
+  height: 36px;
+}
+
+.text {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.33;
+}
+
+/*=================Tablet=================*/
+@media screen and (min-width: 768px) {
+  .headerContainer {
+    max-width: 768px;
+    padding: 20px 32px;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .text {
+    font-size: 22px;
+    line-height: 1.45;
+  }
+}
+
+/*=================Desktop=================*/
+@media screen and (min-width: 1440px) {
+  .headerContainer {
+    max-width: 1440px;
+    padding: 20px 100px;
+  }
+}
