@@ -1,0 +1,50 @@
+.formContainer {
+  border-radius: 25px 25px 0 0;
+  width: 375px;
+  height: 549px;
+  background-color: var(--light-green);
+  padding: 32px 16px 57px 16px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.07;
+  letter-spacing: -0.0375rem;
+}
+
+.text {
+  font-weight: 400;
+  color: var(--light-black);
+}
+
+/*=================Tablet=================*/
+@media screen and (min-width: 768px) {
+  .formContainer {
+    border-radius: 30px;
+    width: 627px;
+    height: 591px;
+    padding: 48px 64px;
+  }
+
+  .title {
+    font-size: 40px;
+    line-height: 1.2;
+    letter-spacing: -0.05rem;
+  }
+}
+
+.text {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+/*=================Desktop=================*/
+@media screen and (min-width: 1440px) {
+}

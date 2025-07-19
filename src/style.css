@@ -6,7 +6,9 @@
 
   /*colors*/
   --black: #121417;
+  --light-black: rgba(18, 20, 23, 0.8);
   --green: #85aa9f;
+  --light-green: rgba(133, 170, 159, 0.1);
   --white: #fcfcfc;
   --white-1: #f8f8f8;
 }
@@ -17,6 +19,7 @@ body {
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
+  letter-spacing: -0.01rem;
   color: var(--black);
 }
 

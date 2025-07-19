@@ -1,12 +1,18 @@
 import Header from "../../components/Header/Header";
+import Wrapper from "../../components/AuthBlocks/Wrapper/Wrapper";
+import RegistrationForm from "../../components/AuthBlocks/Forms/RegistrationForm";
 
-const RegisrationPage = () => {
+const RegistrationPage = () => {
   return (
     <>
       <Header />
-      <main></main>
+      <main>
+        <Wrapper>
+          <RegistrationForm />
+        </Wrapper>
+      </main>
     </>
   );
 };
 
-export default RegisrationPage;
+export default RegistrationPage;

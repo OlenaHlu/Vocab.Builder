@@ -1,7 +1,16 @@
+import Header from "../../components/Header/Header";
+import Wrapper from "../../components/AuthBlocks/Wrapper/Wrapper";
+import LoginForm from "../../components/AuthBlocks/Forms/LoginForm";
+
 const LoginPage = () => {
   return (
     <>
-      <p>Login Page</p>
+      <Header />
+      <main>
+        <Wrapper>
+          <LoginForm />
+        </Wrapper>
+      </main>
     </>
   );
 };
