@@ -38,7 +38,7 @@ const RegistrationForm = () => {
   };
 
   return (
-    <section className={css.formContainer}>
+    <section className={`${css.formContainer} ${css.logContainer}`}>
       <div className={css.info}>
         <h2 className={css.title}>Login</h2>
         <p className={css.text}>
@@ -46,22 +46,22 @@ const RegistrationForm = () => {
         </p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+        <div className={`${css.inputsBlock} ${css.logInputBlocks}`}>
           <div>
             <input
               className={css.input}
               type="text"
               {...register("email")}
-              placeholder="Email:"
+              placeholder="Email"
               autoComplete="email"
             />
             {errors.email && <p>{errors.email.message}</p>}
           </div>
-          <div>
+          <div className={css.inputPwd}>
             <input
               className={css.input}
               {...register("password")}
-              placeholder="Password:"
+              placeholder="Password"
               type={isVisiblePwd ? "text" : "password"}
               autoComplete="current-password"
             />
@@ -74,10 +74,18 @@ const RegistrationForm = () => {
             </button>
             {errors.password && <p>{errors.password.message}</p>}
           </div>
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "loading..." : "Login"}
-          </button>
-          <Link to="/register">Register</Link>
+          <div className={css.submitBlock}>
+            <button
+              className={css.formBtn}
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "loading..." : "Login"}
+            </button>
+            <Link className={css.navigation} to="/register">
+              Register
+            </Link>
+          </div>
         </div>
       </form>
     </section>

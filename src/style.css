@@ -13,6 +13,9 @@
   --white-1: #f8f8f8;
 }
 
+html {
+  height: 100%;
+}
 body {
   background-color: var(--white);
   font-family: var(--font-family);
@@ -21,6 +24,7 @@ body {
   line-height: 1.5;
   letter-spacing: -0.01rem;
   color: var(--black);
+  height: 100%;
 }
 
 * {

@@ -1,0 +1,23 @@
+/*=================Tablet=================*/
+@media screen and (min-width: 768px) {
+  .regContainer {
+    min-height: 100vh;
+    background-image: linear-gradient(
+      292deg,
+      rgba(133, 170, 159, 0.51) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+}
+
+/*=================Desktop=================*/
+@media screen and (min-width: 1440px) {
+  .regContainer {
+    min-height: 100vh;
+    background-image: linear-gradient(
+      292deg,
+      rgba(133, 170, 159, 0.51) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+}

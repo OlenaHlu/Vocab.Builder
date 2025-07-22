@@ -49,13 +49,13 @@ const RegistrationForm = () => {
         </p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+        <div className={css.inputsBlock}>
           <div>
             <input
               className={css.input}
               type="text"
               {...register("name")}
-              placeholder="Name:"
+              placeholder="Name"
               autoComplete="name"
             />
             {errors.name && <p>{errors.name.message}</p>}
@@ -65,16 +65,16 @@ const RegistrationForm = () => {
               className={css.input}
               type="text"
               {...register("email")}
-              placeholder="Email:"
+              placeholder="Email"
               autoComplete="email"
             />
             {errors.email && <p>{errors.email.message}</p>}
           </div>
-          <div>
+          <div className={css.inputPwd}>
             <input
               className={css.input}
               {...register("password")}
-              placeholder="Password:"
+              placeholder="Password"
               type={isVisiblePwd ? "text" : "password"}
               autoComplete="current-password"
             />
@@ -87,11 +87,17 @@ const RegistrationForm = () => {
             </button>
             {errors.password && <p>{errors.password.message}</p>}
           </div>
-          <div>
-            <button type="submit" disabled={isSubmitting}>
+          <div className={css.submitBlock}>
+            <button
+              className={css.formBtn}
+              type="submit"
+              disabled={isSubmitting}
+            >
               {isSubmitting ? "loading" : "Register"}
             </button>
-            <Link to="/login">Login</Link>
+            <Link className={css.navigation} to="/login">
+              Login
+            </Link>
           </div>
         </div>
       </form>
