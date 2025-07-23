@@ -15,18 +15,12 @@ type LoginFormValues = {
 const RegistrationForm = () => {
   const [isVisiblePwd, setIsVisiblePwd] = useState(false);
 
-  const initialValues: LoginFormValues = {
-    email: "",
-    password: "",
-  };
-
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormValues>({
     resolver: yupResolver(loginSchema),
-    defaultValues: initialValues,
   });
 
   const togglePwd = () => {
@@ -38,7 +32,7 @@ const RegistrationForm = () => {
   };
 
   return (
-    <section className={`${css.formContainer} ${css.logContainer}`}>
+    <section className={css.formContainer}>
       <div className={css.info}>
         <h2 className={css.title}>Login</h2>
         <p className={css.text}>
@@ -47,7 +41,7 @@ const RegistrationForm = () => {
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={`${css.inputsBlock} ${css.logInputBlocks}`}>
-          <div>
+          <div className={css.inputWrapper}>
             <input
               className={css.input}
               type="text"
@@ -55,9 +49,14 @@ const RegistrationForm = () => {
               placeholder="Email"
               autoComplete="email"
             />
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && (
+              <p className={css.errorMessage}>
+                <Icon className={css.errorIcon} iconName="error" />
+                {errors.email.message}{" "}
+              </p>
+            )}
           </div>
-          <div className={css.inputPwd}>
+          <div className={css.inputWrapper}>
             <input
               className={css.input}
               {...register("password")}
@@ -65,14 +64,24 @@ const RegistrationForm = () => {
               type={isVisiblePwd ? "text" : "password"}
               autoComplete="current-password"
             />
-            <button type="button" onClick={togglePwd}>
+            <button
+              type="button"
+              onClick={togglePwd}
+              className={css.togglePwdBtn}
+            >
               {isVisiblePwd ? (
                 <Icon className={css.icon} iconName="eye" />
               ) : (
                 <Icon className={css.icon} iconName="eye-off" />
               )}
             </button>
-            {errors.password && <p>{errors.password.message}</p>}
+            {errors.password && (
+              <p className={css.errorMessage}>
+                {" "}
+                <Icon className={css.errorIcon} iconName="error" />
+                {errors.password.message}
+              </p>
+            )}
           </div>
           <div className={css.submitBlock}>
             <button

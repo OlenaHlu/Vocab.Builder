@@ -16,19 +16,12 @@ type RegistrationFormValues = {
 const RegistrationForm = () => {
   const [isVisiblePwd, setIsVisiblePwd] = useState(false);
 
-  const initialValues: RegistrationFormValues = {
-    name: "",
-    email: "",
-    password: "",
-  };
-
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<RegistrationFormValues>({
     resolver: yupResolver(registrationSchema),
-    defaultValues: initialValues,
   });
 
   const togglePwd = () => {
@@ -50,7 +43,7 @@ const RegistrationForm = () => {
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={css.inputsBlock}>
-          <div>
+          <div className={css.inputWrapper}>
             <input
               className={css.input}
               type="text"
@@ -58,9 +51,14 @@ const RegistrationForm = () => {
               placeholder="Name"
               autoComplete="name"
             />
-            {errors.name && <p>{errors.name.message}</p>}
+            {errors.name && (
+              <p className={css.errorMessage}>
+                <Icon className={css.errorIcon} iconName="error" />
+                {errors.name.message}
+              </p>
+            )}
           </div>
-          <div>
+          <div className={css.inputWrapper}>
             <input
               className={css.input}
               type="text"
@@ -68,9 +66,14 @@ const RegistrationForm = () => {
               placeholder="Email"
               autoComplete="email"
             />
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && (
+              <p className={css.errorMessage}>
+                <Icon className={css.errorIcon} iconName="error" />
+                {errors.email.message}{" "}
+              </p>
+            )}
           </div>
-          <div className={css.inputPwd}>
+          <div className={css.inputWrapper}>
             <input
               className={css.input}
               {...register("password")}
@@ -78,14 +81,25 @@ const RegistrationForm = () => {
               type={isVisiblePwd ? "text" : "password"}
               autoComplete="current-password"
             />
-            <button type="button" onClick={togglePwd}>
+            <button
+              type="button"
+              onClick={togglePwd}
+              className={css.togglePwdBtn}
+            >
               {isVisiblePwd ? (
                 <Icon className={css.icon} iconName="eye" />
               ) : (
                 <Icon className={css.icon} iconName="eye-off" />
               )}
             </button>
-            {errors.password && <p>{errors.password.message}</p>}
+
+            {errors.password && (
+              <p className={css.errorMessage}>
+                {" "}
+                <Icon className={css.errorIcon} iconName="error" />
+                {errors.password.message}
+              </p>
+            )}
           </div>
           <div className={css.submitBlock}>
             <button

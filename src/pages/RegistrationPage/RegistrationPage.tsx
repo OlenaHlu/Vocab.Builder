@@ -6,7 +6,7 @@ import RegistrationForm from "../../components/AuthBlocks/Forms/RegistrationForm
 
 const RegistrationPage = () => {
   return (
-    <div className={css.regContainer}>
+    <div className={css.banner}>
       <Header />
       <main>
         <Wrapper>

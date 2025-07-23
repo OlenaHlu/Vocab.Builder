@@ -1,13 +1,8 @@
 .formContainer {
   border-radius: 25px 25px 0 0;
   width: 375px;
-  height: 549px;
   background-color: var(--light-green);
   padding: 32px 16px 57px 16px;
-}
-
-.logContainer {
-  height: 479px;
 }
 
 .info {
@@ -35,6 +30,10 @@
   margin-top: 16px;
 }
 
+.inputWrapper {
+  position: relative;
+}
+
 .logInputBlocks {
   margin-top: 40px;
 }
@@ -51,10 +50,12 @@
   font-size: 16px;
   line-height: 1.5;
   color: var(--black);
+  transition: border 0.3s ease;
 }
 
 .input:focus {
-  outline: 1px solid var(--green);
+  outline: none;
+  border: 1px solid var(--green);
 }
 
 .input::placeholder {
@@ -63,16 +64,57 @@
   line-height: 1.5;
 }
 
+.inputError {
+  border-color: #e90516;
+  outline: none;
+}
+
+.inputSuccess {
+  border-color: #30b94d;
+  outline: none;
+}
+
+.errorMessage,
+.successMessage {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.errorMessage {
+  color: #e90516;
+}
+
+.successMessage {
+  color: #30b94d;
+}
+
+.errorIcon,
+.successIcon {
+  width: 16px;
+  height: 16px;
+}
+
 .inputPwd {
   position: relative;
+  width: 100%;
+  height: 56px;
+}
+
+.togglePwdBtn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .icon {
-  position: absolute;
   width: 20px;
   height: 20px;
-  top: 18px;
-  right: 18px;
   stroke: var(--black);
   fill: none;
 }
@@ -109,12 +151,7 @@
   .formContainer {
     border-radius: 30px;
     width: 627px;
-    height: 591px;
     padding: 48px 64px;
-  }
-
-  .logContainer {
-    height: 518px;
   }
 
   .title {
