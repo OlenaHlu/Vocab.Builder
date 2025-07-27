@@ -13,6 +13,7 @@ const TrainingPage = lazy(() => import("./pages/TrainingPage/TrainingPage"));
 
 function App() {
   const isAuthenticated = false; //temporarily
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
