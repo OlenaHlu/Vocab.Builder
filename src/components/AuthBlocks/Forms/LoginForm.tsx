@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import Icon from "../../common/Icon";
 import { loginSchema } from "../../../utils/validation";
 import { useAppDispatch } from "../../../redux/hooks";
-import { signIn } from "../../../redux/auth/operations";
+import { signIn, getCurrentUser } from "../../../redux/auth/operations";
 
 type LoginFormValues = {
   email: string;
@@ -39,10 +39,12 @@ const LoginForm = () => {
     try {
       await dispatch(signIn(data)).unwrap();
       toast.success("Login successful! Welcome!");
+      await dispatch(getCurrentUser()).unwrap();
       navigate("/dictionary");
     } catch (error: any) {
-      console.error("Login failed:", error);
-      toast.error(error || "Something went wrong during login.");
+      console.error("Operation failed:", error);
+      const errorMessage = error?.message || "Something went wrong.";
+      toast.error(errorMessage);
     }
   };
 

@@ -29,14 +29,7 @@ const handleRejected = (state: AuthState, action: PayloadAction<any>) => {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    logout: (state) => {
-      state.user = null;
-      state.isLoading = false;
-      state.error = null;
-      state.isLoggedIn = false;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(signUp.pending, handlePending)
@@ -77,5 +70,4 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
 export const authReducer = authSlice.reducer;

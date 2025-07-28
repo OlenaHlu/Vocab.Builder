@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { registrationSchema } from "../../../utils/validation";
 import { useAppDispatch } from "../../../redux/hooks";
 import Icon from "../../common/Icon";
-import { signUp } from "../../../redux/auth/operations";
+import { signUp, getCurrentUser } from "../../../redux/auth/operations";
 
 type RegistrationFormValues = {
   name: string;
@@ -39,12 +39,14 @@ const RegistrationForm = () => {
     console.log("Form data:", data);
     try {
       await dispatch(signUp(data)).unwrap();
+      await dispatch(getCurrentUser()).unwrap();
       toast.success("Registration successful! Welcome!");
       reset();
       navigate("/dictionary");
     } catch (error: any) {
-      console.error("Registration failed:", error);
-      toast.error(error || "Something went wrong during registration.");
+      console.error("Operation failed:", error);
+      const errorMessage = error?.message || "Something went wrong.";
+      toast.error(errorMessage);
     }
   };
 

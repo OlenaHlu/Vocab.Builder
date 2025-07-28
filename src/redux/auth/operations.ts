@@ -64,7 +64,10 @@ export const getCurrentUser = createAsyncThunk<
     const response = await authenticatedAxios.get<CurrentUser>(
       "/users/current"
     );
-    const { _id, name, email } = response.data;
+    const { _id, name, email, token } = response.data;
+    if (token) {
+      setAccessToken(token);
+    }
     return { _id, name, email } as User;
   } catch (error: any) {
     console.error("Failed to get current user:", error);
