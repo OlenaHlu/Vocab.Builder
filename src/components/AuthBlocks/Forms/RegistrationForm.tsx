@@ -1,11 +1,15 @@
 import css from "./Form.module.css";
 
 import { useState } from "react";
-import { registrationSchema } from "../../../utils/validation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+
+import { registrationSchema } from "../../../utils/validation";
+import { useAppDispatch } from "../../../redux/hooks";
 import Icon from "../../common/Icon";
-import { Link } from "react-router-dom";
+import { signUp } from "../../../redux/auth/operations";
 
 type RegistrationFormValues = {
   name: string;
@@ -15,11 +19,14 @@ type RegistrationFormValues = {
 
 const RegistrationForm = () => {
   const [isVisiblePwd, setIsVisiblePwd] = useState(false);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm<RegistrationFormValues>({
     resolver: yupResolver(registrationSchema),
   });
@@ -28,8 +35,17 @@ const RegistrationForm = () => {
     setIsVisiblePwd(!isVisiblePwd);
   };
 
-  const onSubmit = (data: RegistrationFormValues) => {
-    console.log("form is valid:", data);
+  const onSubmit = async (data: RegistrationFormValues) => {
+    console.log("Form data:", data);
+    try {
+      await dispatch(signUp(data)).unwrap();
+      toast.success("Registration successful! Welcome!");
+      reset();
+      navigate("/dictionary");
+    } catch (error: any) {
+      console.error("Registration failed:", error);
+      toast.error(error || "Something went wrong during registration.");
+    }
   };
 
   return (

@@ -1,19 +1,25 @@
 import css from "./Form.module.css";
 
 import { useState } from "react";
-import { loginSchema } from "../../../utils/validation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import Icon from "../../common/Icon";
-import { Link } from "react-router-dom";
+import { loginSchema } from "../../../utils/validation";
+import { useAppDispatch } from "../../../redux/hooks";
+import { signIn } from "../../../redux/auth/operations";
 
 type LoginFormValues = {
   email: string;
   password: string;
 };
 
-const RegistrationForm = () => {
+const LoginForm = () => {
   const [isVisiblePwd, setIsVisiblePwd] = useState(false);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -27,8 +33,17 @@ const RegistrationForm = () => {
     setIsVisiblePwd(!isVisiblePwd);
   };
 
-  const onSubmit = (data: LoginFormValues) => {
+  const onSubmit = async (data: LoginFormValues) => {
     console.log("form is valid:", data);
+
+    try {
+      await dispatch(signIn(data)).unwrap();
+      toast.success("Login successful! Welcome!");
+      navigate("/dictionary");
+    } catch (error: any) {
+      console.error("Login failed:", error);
+      toast.error(error || "Something went wrong during login.");
+    }
   };
 
   return (
@@ -100,4 +115,4 @@ const RegistrationForm = () => {
     </section>
   );
 };
-export default RegistrationForm;
+export default LoginForm;

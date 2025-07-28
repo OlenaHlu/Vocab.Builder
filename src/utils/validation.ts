@@ -9,8 +9,10 @@ export const registrationSchema = Yup.object().shape({
     .email("Invalid email format")
     .required("Email is Required"),
   password: Yup.string()
-    .min(8, "Password is too short - should be 8 chars minimum.")
-    .max(30, "Password is too long - should be 30 chars maximum.")
+    .matches(
+      /^(?=(?:.*[a-zA-Z]){6})(?=(?:.*\d){1})[a-zA-Z\d]{7}$/,
+      "The password must consist of of 6 English letters and 1 number."
+    )
     .required("Password is Required"),
 });
 
@@ -19,7 +21,9 @@ export const loginSchema = Yup.object().shape({
     .email("Invalid email format")
     .required("Email is required"),
   password: Yup.string()
-    .min(8, "Password is too short - should be 8 chars minimum.")
-    .max(30, "Password is too long - should be 30 chars maximum.")
+    .matches(
+      /^(?=(?:.*[a-zA-Z]){6})(?=(?:.*\d){1})[a-zA-Z\d]{7}$/,
+      "Invalid password format."
+    )
     .required("Password is Required"),
 });
