@@ -78,19 +78,18 @@ export const getCurrentUser = createAsyncThunk<
   }
 });
 
-export const signOut = createAsyncThunk<
-  void,
-  undefined,
-  { rejectValue: string }
->("users/signOut", async (_, thunkAPI) => {
-  try {
-    await authenticatedAxios.post("/users/signout");
-    clearAuthTokens();
-  } catch (error: any) {
-    console.error("Failed to sign out:", error);
-    clearAuthTokens();
-    return thunkAPI.rejectWithValue(
-      error.response?.data?.message || "Failed to sign out"
-    );
+export const signOut = createAsyncThunk<void, void, { rejectValue: string }>(
+  "users/signOut",
+  async (_, thunkAPI) => {
+    try {
+      await authenticatedAxios.post("/users/signout");
+      clearAuthTokens();
+    } catch (error: any) {
+      console.error("Failed to sign out:", error);
+      clearAuthTokens();
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to sign out"
+      );
+    }
   }
-});
+);

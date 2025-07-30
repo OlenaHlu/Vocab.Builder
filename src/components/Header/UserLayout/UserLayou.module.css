@@ -1,0 +1,46 @@
+.userContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.user {
+  border-radius: 50%;
+  background-color: var(--green);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconUser {
+  width: 13.33px;
+  height: 13.33px;
+}
+
+/*=================Tablet=================*/
+@media screen and (min-width: 768px) {
+  .userContainer {
+    gap: 16px;
+  }
+
+  .fullName {
+    font-size: 20px;
+  }
+
+  .user {
+    width: 48px;
+    height: 48px;
+  }
+
+  .iconUser {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/*=================Desktop=================*/
+@media screen and (min-width: 1440px) {
+}

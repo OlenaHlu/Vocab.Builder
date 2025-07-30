@@ -30,6 +30,28 @@
   line-height: 1.33;
 }
 
+.userLayout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoutBtn {
+  display: none;
+}
+
+.burgerBtn {
+  display: flex;
+  align-items: center;
+}
+
+.burger {
+  width: 32px;
+  height: 22px;
+  stroke: var(--black);
+}
+
 /*=================Tablet=================*/
 @media screen and (min-width: 768px) {
   .headerContainer {
@@ -46,6 +68,15 @@
     font-size: 22px;
     line-height: 1.45;
   }
+
+  .userLayout {
+    gap: 28px;
+  }
+
+  .burger {
+    width: 40px;
+    height: 28px;
+  }
 }
 
 /*=================Desktop=================*/
@@ -53,5 +84,28 @@
   .headerContainer {
     max-width: 1440px;
     padding: 20px 100px;
+  }
+
+  .burgerBtn {
+    display: none;
+  }
+
+  .logoutBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--black);
+  }
+
+  .iconEdit {
+    fill: none;
+    stroke: var(--black);
+    width: 16px;
+    height: 16px;
   }
 }

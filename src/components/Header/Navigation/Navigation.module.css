@@ -8,4 +8,32 @@
 
 /*=================Desktop=================*/
 @media screen and (min-width: 1440px) {
+  .navContainer {
+    display: flex;
+  }
+
+  .navList {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .link {
+    font-size: 14px;
+    color: var(--black);
+    padding: 12px 0px;
+  }
+
+  .isActive {
+    border-radius: 15px;
+    padding: 12px 20px;
+    background-color: var(--green);
+
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--white);
+    text-align: center;
+  }
 }

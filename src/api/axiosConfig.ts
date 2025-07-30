@@ -40,7 +40,6 @@ authenticatedAxios.interceptors.response.use(
       );
       clearAuthTokens();
       toast.error("Your session has expired. Please log in again.");
-      window.location.href = "/login";
     }
 
     let errorMessage = "An unexpected error occurred.";

@@ -9,7 +9,7 @@ export const unauthenticatedAxios = axios.create({
 });
 
 export const getAccessToken = (): string | null => {
-  return localStorage.getItem("token");
+  return localStorage.getItem("accessToken");
 };
 
 export const setAccessToken = (token: string): void => {
@@ -17,6 +17,6 @@ export const setAccessToken = (token: string): void => {
 };
 
 export const clearAuthTokens = (): void => {
-  localStorage.removeItem("token");
+  localStorage.removeItem("accessToken");
   console.log("Authentication token cleared.");
 };
