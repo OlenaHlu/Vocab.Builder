@@ -2,6 +2,30 @@
   display: none;
 }
 
+.navModal {
+  display: flex;
+}
+
+.listModal {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.listModal .link {
+  font-size: 14px;
+  color: var(--white);
+}
+
+.listModal .isActive {
+  border-radius: 15px;
+  padding: 12px 20px;
+  width: 125px;
+  background-color: var(--white);
+  color: var(--black);
+  text-align: center;
+}
+
 /*=================Tablet=================*/
 @media screen and (min-width: 768px) {
 }

@@ -1,23 +1,25 @@
 import css from "./Header.module.css";
 
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useAppSelector } from "../../redux/hooks";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { useState } from "react";
 import Icon from "../common/Icon";
 import Navigation from "./Navigation/Navigation";
 import UserLayout from "./UserLayout/UserLayout";
-import { signOut } from "../../redux/auth/operations";
-import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import UserModal from "../Modals/UserModal/UserModal";
+
+import LogoutBtn from "./LogoutBtn/LogoutBtn";
 
 const Header = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleLogout = () => {
-    dispatch(signOut());
-    navigate("/login");
-    toast.success("Sign out success");
+  const openMenu = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeMenu = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -32,20 +34,25 @@ const Header = () => {
             <Navigation />
             <div className={css.userLayout}>
               <UserLayout />
-              <button type="button" className={css.burgerBtn}>
-                <Icon className={css.burger} iconName="burger" />
-              </button>
               <button
                 type="button"
-                className={css.logoutBtn}
-                onClick={handleLogout}
+                className={css.burgerBtn}
+                onClick={openMenu}
               >
-                Log out <Icon className={css.iconEdit} iconName="arrow" />
+                <Icon className={css.burger} iconName="burger" />
               </button>
+              <LogoutBtn />
             </div>
           </>
         )}
       </div>
+
+      <div
+        className={`${css.backdrop} ${isModalOpen ? css.isOpen : ""}`}
+        onClick={closeMenu}
+      />
+
+      <UserModal isOpen={isModalOpen} onClose={closeMenu} />
     </header>
   );
 };

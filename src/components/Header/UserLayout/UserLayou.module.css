@@ -6,7 +6,7 @@
 }
 
 .user {
-  border-radius: 50%;
+  border-radius: 30px;
   background-color: var(--green);
   width: 36px;
   height: 36px;
@@ -15,9 +15,27 @@
   align-items: center;
 }
 
+.name {
+  text-transform: capitalize;
+}
+
+.nameModal {
+  color: var(--white);
+  text-transform: capitalize;
+}
+
+.userModal {
+  background-color: var(--white);
+}
+
 .iconUser {
   width: 13.33px;
   height: 13.33px;
+}
+
+.iconUserModal {
+  width: 20px;
+  height: 20px;
 }
 
 /*=================Tablet=================*/
@@ -26,7 +44,7 @@
     gap: 16px;
   }
 
-  .fullName {
+  .name {
     font-size: 20px;
   }
 
@@ -36,6 +54,11 @@
   }
 
   .iconUser {
+    width: 16px;
+    height: 16px;
+  }
+
+  .iconUserModal {
     width: 24px;
     height: 24px;
   }

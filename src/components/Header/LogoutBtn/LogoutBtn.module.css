@@ -1,0 +1,48 @@
+.logoutBtn {
+  display: none;
+}
+
+.logoutBtnModal {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 28px;
+
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--white);
+}
+
+.logoutBtnModal .icon {
+  fill: none;
+  stroke: var(--white);
+  width: 16px;
+  height: 16px;
+}
+
+/*=================Tablet=================*/
+@media screen and (min-width: 768px) {
+}
+
+/*=================Desktop=================*/
+@media screen and (min-width: 1440px) {
+  .logoutBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--black);
+  }
+
+  .icon {
+    fill: none;
+    stroke: var(--black);
+    width: 16px;
+    height: 16px;
+  }
+}

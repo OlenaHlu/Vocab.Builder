@@ -1,0 +1,74 @@
+.userContainer {
+  position: fixed;
+  padding: 16px;
+  align-items: center;
+  width: 175px;
+  height: 100vh;
+  top: 0;
+  right: 0;
+
+  z-index: 100;
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+
+  background-color: var(--green);
+  background-image: url("../../../assets/banners/bg-mob@1x.png");
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 363px 318px;
+}
+
+@media (min-resolution: 192dpi),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+  .userContainer {
+    background-image: url("../../../assets/banners/bg-mob@2x.png");
+  }
+}
+
+.userContainer.isOpen {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.userHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 166px;
+}
+
+.closeBtn {
+  width: 32px;
+  height: 32px;
+}
+
+/*=================Tablet=================*/
+@media screen and (min-width: 768px) {
+  .userContainer {
+    padding: 20px 32px;
+    width: 300px;
+
+    background-image: url("../../../assets/banners/bg-desc@1x.png");
+    background-size: 498px 435px;
+  }
+
+  @media (min-resolution: 192dpi),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .userContainer {
+      background-image: url("../../../assets/banners/bg-desc@2x.png");
+    }
+  }
+
+  .userHeader {
+    margin-bottom: 170px;
+  }
+}
+
+/*=================Desktop=================*/
+@media screen and (min-width: 1440px) {
+}
