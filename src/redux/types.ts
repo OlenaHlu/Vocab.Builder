@@ -16,3 +16,5 @@ export type CurrentUser = {
   name: string;
   token: string;
 };
+
+export type Category = string;
