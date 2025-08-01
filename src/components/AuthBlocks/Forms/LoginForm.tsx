@@ -4,9 +4,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 import Icon from "../../common/Icon";
+import ShowToast from "../../common/ShowToast";
 import { loginSchema } from "../../../utils/validation";
 import { useAppDispatch } from "../../../redux/hooks";
 import { signIn, getCurrentUser } from "../../../redux/auth/operations";
@@ -38,13 +38,13 @@ const LoginForm = () => {
 
     try {
       await dispatch(signIn(data)).unwrap();
-      toast.success("Login successful! Welcome!");
+      ShowToast({ message: "Login successful! Welcome!", type: "success" });
       await dispatch(getCurrentUser()).unwrap();
       navigate("/dictionary");
     } catch (error: any) {
       console.error("Operation failed:", error);
       const errorMessage = error?.message || "Something went wrong.";
-      toast.error(errorMessage);
+      ShowToast({ message: errorMessage, type: "error" });
     }
   };
 

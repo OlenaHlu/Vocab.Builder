@@ -2,9 +2,9 @@ import css from "./LogoutBtn.module.css";
 
 import { useNavigate } from "react-router-dom";
 import { signOut } from "../../../redux/auth/operations";
-import { toast } from "react-toastify";
 import { useAppDispatch } from "../../../redux/hooks";
 import Icon from "../../common/Icon";
+import ShowToast from "../../common/ShowToast";
 
 type LogoutBtnProps = {
   isModal?: boolean;
@@ -14,10 +14,16 @@ const LogoutBtn = ({ isModal = false }: LogoutBtnProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    dispatch(signOut());
-    navigate("/login");
-    toast.success("Sign out success");
+  const handleLogout = async () => {
+    try {
+      await dispatch(signOut());
+      navigate("/login");
+      ShowToast({ message: "Sign out success", type: "success" });
+    } catch (error: any) {
+      console.error("Sign out failed:", error);
+      const errorMessage = error?.message || "Something went wrong.";
+      ShowToast({ message: errorMessage, type: "error" });
+    }
   };
 
   return (

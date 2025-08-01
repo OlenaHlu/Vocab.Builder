@@ -3,12 +3,12 @@ import css from "./Form.module.css";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 
 import { registrationSchema } from "../../../utils/validation";
 import { useAppDispatch } from "../../../redux/hooks";
 import Icon from "../../common/Icon";
+import ShowToast from "../../common/ShowToast";
 import { signUp, getCurrentUser } from "../../../redux/auth/operations";
 
 type RegistrationFormValues = {
@@ -40,13 +40,16 @@ const RegistrationForm = () => {
     try {
       await dispatch(signUp(data)).unwrap();
       await dispatch(getCurrentUser()).unwrap();
-      toast.success("Registration successful! Welcome!");
+      ShowToast({
+        message: "Registration successful! Welcome!",
+        type: "success",
+      });
       reset();
       navigate("/dictionary");
     } catch (error: any) {
       console.error("Operation failed:", error);
       const errorMessage = error?.message || "Something went wrong.";
-      toast.error(errorMessage);
+      ShowToast({ message: errorMessage, type: "error" });
     }
   };
 
