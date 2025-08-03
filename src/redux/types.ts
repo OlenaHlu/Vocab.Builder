@@ -18,3 +18,26 @@ export type CurrentUser = {
 };
 
 export type Category = string;
+
+export type Word = {
+  _id: string;
+  en: string;
+  ua: string;
+  category: Category;
+  isIrregular: boolean;
+};
+
+export type WordsRequestParams = {
+  keyword?: string;
+  category?: Category;
+  isIrregular?: boolean;
+  page?: number;
+  limit?: number;
+};
+
+export type WordsResponse = {
+  results: Word[];
+  totalPages: number;
+  page: number;
+  perPage: number;
+};

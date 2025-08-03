@@ -6,14 +6,17 @@ import {
   selectCategories,
   selectSelectedCategory,
   selectSearchQuery,
+  selectVerbType,
 } from "../../../redux/filters/selectors";
 import { setCategory, setVerbType } from "../../../redux/filters/slice";
+import Icon from "../../common/Icon";
 
 const Filters = () => {
   const dispatch = useAppDispatch();
   const categories = useAppSelector(selectCategories);
   const selectedCategory = useAppSelector(selectSelectedCategory);
   const searchQuery = useAppSelector(selectSearchQuery);
+  const verbType = useAppSelector(selectVerbType);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -32,13 +35,16 @@ const Filters = () => {
   return (
     <>
       <form>
-        <input
-          className={css.input}
-          type="text"
-          value={searchQuery}
-          placeholder="Find the word"
-          onChange={handleSearch}
-        />
+        <div>
+          <input
+            className={css.input}
+            type="text"
+            value={searchQuery}
+            placeholder="Find the word"
+            onChange={handleSearch}
+          />
+          <Icon iconName="search" className={css.iconSearch} />
+        </div>
         <select value={selectedCategory} onChange={handleCategory}>
           <option value="all">Categories</option>
           {categories.map((category) => (
@@ -53,7 +59,7 @@ const Filters = () => {
               <input
                 type="radio"
                 value="regular"
-                checked={false}
+                checked={verbType === "regular"}
                 onChange={handleVerbType}
               />{" "}
               Regular
@@ -62,7 +68,7 @@ const Filters = () => {
               <input
                 type="radio"
                 value="irregular"
-                checked={false}
+                checked={verbType === "irregular"}
                 onChange={handleVerbType}
               />
               Irregular
