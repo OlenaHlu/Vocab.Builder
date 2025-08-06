@@ -26,7 +26,7 @@ const Filters = () => {
     dispatch(setCategory(e.target.value));
   };
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {};
+  // const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {};
 
   const handleVerbType = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setVerbType(e.target.value));
@@ -41,7 +41,7 @@ const Filters = () => {
             type="text"
             value={searchQuery}
             placeholder="Find the word"
-            onChange={handleSearch}
+            // onChange={handleSearch}
           />
           <Icon iconName="search" className={css.iconSearch} />
         </div>
