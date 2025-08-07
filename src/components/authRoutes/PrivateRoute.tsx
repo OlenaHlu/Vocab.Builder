@@ -1,5 +1,8 @@
 import { useAppSelector } from "../../redux/hooks";
-import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import {
+  selectIsLoggedIn,
+  selectAuthIsLoading,
+} from "../../redux/auth/selectors";
 import { Navigate } from "react-router-dom";
 
 type PrivateRouteProps = {
@@ -7,9 +10,14 @@ type PrivateRouteProps = {
 };
 
 const PrivateRoute = ({ component }: PrivateRouteProps) => {
-  const isAuthenticated = useAppSelector(selectIsLoggedIn);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const isLoading = useAppSelector(selectAuthIsLoading);
 
-  return isAuthenticated ? <>{component}</> : <Navigate to="/login" />;
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return isLoggedIn ? <>{component}</> : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;

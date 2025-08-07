@@ -1,9 +1,10 @@
-import { lazy, Suspense } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./components/authRoutes/PrivateRoute";
 import RestrictedRoute from "./components/authRoutes/RestrictedRoute";
-import { useAppSelector } from "./redux/hooks";
-import { selectIsLoggedIn } from "./redux/auth/selectors";
+import { getCurrentUser } from "./redux/auth/operations";
+import { useAppDispatch } from "./redux/hooks";
+
 import { ToastContainer } from "react-toastify";
 
 const RegistrationPage = lazy(
@@ -17,7 +18,11 @@ const RecommendPage = lazy(() => import("./pages/RecommendPage/RecommendPage"));
 const TrainingPage = lazy(() => import("./pages/TrainingPage/TrainingPage"));
 
 function App() {
-  const isAuthenticated = useAppSelector(selectIsLoggedIn);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, [dispatch]);
 
   return (
     <>
@@ -25,13 +30,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              isAuthenticated ? (
-                <Navigate to="/dictionary" replace />
-              ) : (
-                <Navigate to="/login" replace />
-              )
-            }
+            element={<PrivateRoute component={<DictionaryPage />} />}
           />
           <Route
             path="/register"
