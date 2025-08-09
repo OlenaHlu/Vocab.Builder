@@ -8,7 +8,11 @@ import {
   selectSearchQuery,
   selectVerbType,
 } from "../../../redux/filters/selectors";
-import { setCategory, setVerbType } from "../../../redux/filters/slice";
+import {
+  setCategory,
+  setVerbType,
+  setSearchQuery,
+} from "../../../redux/filters/slice";
 import Icon from "../../common/Icon";
 
 const Filters = () => {
@@ -22,6 +26,12 @@ const Filters = () => {
 
   useEffect(() => {
     dispatch(getCategories());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(setCategory("all"));
+    dispatch(setSearchQuery(""));
+    dispatch(setVerbType(""));
   }, [dispatch]);
 
   const handleCategory = (category: string) => {
@@ -49,31 +59,40 @@ const Filters = () => {
           />
           <Icon iconName="search" className={css.iconSearch} />
         </div>
-        <button type="button" onClick={toggleDropDown}>
-          {selectedCategory}
-          <span>
-            {isOpen ? (
-              <Icon iconName="toggle" className={css.iconUp} />
-            ) : (
-              <Icon iconName="toggle" className={css.iconDown} />
-            )}
-          </span>
-        </button>
-        {isOpen && (
-          <ul>
-            {categories.map((category) => (
-              <li
-                key={category}
-                onClick={() => {
-                  handleCategory(category);
-                }}
-              >
-                {category}
-              </li>
-            ))}
-          </ul>
-        )}
+        <div className={css.filter}>
+          <button
+            className={css.categoriesBtn}
+            type="button"
+            onClick={toggleDropDown}
+          >
+            {selectedCategory === "all" ? "Categories" : selectedCategory}
 
+            <span>
+              {isOpen ? (
+                <Icon iconName="toggle" className={css.iconUp} />
+              ) : (
+                <Icon iconName="toggle" className={css.iconDown} />
+              )}
+            </span>
+          </button>
+          {isOpen && (
+            <ul className={css.categoriesList}>
+              {categories.map((category) => (
+                <li
+                  className={`${css.categoryItem} ${
+                    selectedCategory === category ? css.active : ""
+                  }`}
+                  key={category}
+                  onClick={() => {
+                    handleCategory(category);
+                  }}
+                >
+                  {category}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
         {selectedCategory === "verb" && (
           <div>
             <label>

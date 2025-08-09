@@ -1,4 +1,4 @@
-import css from "./UserLayou.module.css";
+import css from "./UserLayout.module.css";
 
 import { selectUser } from "../../../redux/auth/selectors";
 import { useAppSelector } from "../../../redux/hooks";

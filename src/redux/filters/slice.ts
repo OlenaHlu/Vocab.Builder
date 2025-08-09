@@ -13,7 +13,7 @@ export type FiltersState = {
 
 const initialState: FiltersState = {
   categories: [],
-  selectedCategory: "Categories",
+  selectedCategory: "all",
   searchQuery: "",
   verbType: "",
   isLoading: false,
