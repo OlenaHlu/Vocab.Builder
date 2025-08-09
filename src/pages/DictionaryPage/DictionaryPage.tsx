@@ -6,7 +6,6 @@ const DictionaryPage = () => {
     <>
       <Header />
       <Dashboard />
-      <p>Dictionary Page</p>
     </>
   );
 };

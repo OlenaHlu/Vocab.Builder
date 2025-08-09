@@ -1,5 +1,5 @@
 import css from "./Filters.module.css";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getCategories } from "../../../redux/filters/operation";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import {
@@ -13,7 +13,9 @@ import Icon from "../../common/Icon";
 
 const Filters = () => {
   const dispatch = useAppDispatch();
+  const [isOpen, setIsOpen] = useState(false);
   const categories = useAppSelector(selectCategories);
+
   const selectedCategory = useAppSelector(selectSelectedCategory);
   const searchQuery = useAppSelector(selectSearchQuery);
   const verbType = useAppSelector(selectVerbType);
@@ -22,9 +24,11 @@ const Filters = () => {
     dispatch(getCategories());
   }, [dispatch]);
 
-  const handleCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setCategory(e.target.value));
+  const handleCategory = (category: string) => {
+    dispatch(setCategory(category));
+    setIsOpen(false);
   };
+  const toggleDropDown = () => setIsOpen((prev) => !prev);
 
   // const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {};
 
@@ -34,8 +38,8 @@ const Filters = () => {
 
   return (
     <>
-      <form>
-        <div>
+      <form className={css.form}>
+        <div className={css.inputBlock}>
           <input
             className={css.input}
             type="text"
@@ -45,14 +49,31 @@ const Filters = () => {
           />
           <Icon iconName="search" className={css.iconSearch} />
         </div>
-        <select value={selectedCategory} onChange={handleCategory}>
-          <option value="all">Categories</option>
-          {categories.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
+        <button type="button" onClick={toggleDropDown}>
+          {selectedCategory}
+          <span>
+            {isOpen ? (
+              <Icon iconName="toggle" className={css.iconUp} />
+            ) : (
+              <Icon iconName="toggle" className={css.iconDown} />
+            )}
+          </span>
+        </button>
+        {isOpen && (
+          <ul>
+            {categories.map((category) => (
+              <li
+                key={category}
+                onClick={() => {
+                  handleCategory(category);
+                }}
+              >
+                {category}
+              </li>
+            ))}
+          </ul>
+        )}
+
         {selectedCategory === "verb" && (
           <div>
             <label>
