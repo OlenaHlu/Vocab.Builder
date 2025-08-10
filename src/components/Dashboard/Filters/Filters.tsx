@@ -94,23 +94,41 @@ const Filters = () => {
           )}
         </div>
         {selectedCategory === "verb" && (
-          <div>
-            <label>
+          <div className={css.verbsContainer}>
+            <label className={css.labelRadio}>
               <input
+                className={css.inputRadio}
                 type="radio"
                 value="regular"
                 checked={verbType === "regular"}
                 onChange={handleVerbType}
-              />{" "}
+              />
+              {verbType === "regular" ? (
+                <Icon className={css.radioIcon} iconName="radio-btn-full" />
+              ) : (
+                <Icon
+                  className={`${css.radioIcon} ${css.off}`}
+                  iconName="radio-btn"
+                />
+              )}
               Regular
             </label>
-            <label>
+            <label className={css.labelRadio}>
               <input
+                className={css.inputRadio}
                 type="radio"
                 value="irregular"
                 checked={verbType === "irregular"}
                 onChange={handleVerbType}
               />
+              {verbType === "irregular" ? (
+                <Icon className={css.radioIcon} iconName="radio-btn-full" />
+              ) : (
+                <Icon
+                  className={`${css.radioIcon} ${css.off}`}
+                  iconName="radio-btn"
+                />
+              )}
               Irregular
             </label>
           </div>

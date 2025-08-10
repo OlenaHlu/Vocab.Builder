@@ -23,6 +23,7 @@
   font-size: 16px;
   line-height: 1.5;
   color: var(--black);
+  transition: border 0.3s ease;
 }
 
 .input:focus {
@@ -64,6 +65,11 @@
   line-height: 1.5;
   color: var(--black);
   text-transform: capitalize;
+  transition: border 0.3s ease;
+}
+
+.categoriesBtn:focus {
+  border: 1px solid var(--green);
 }
 
 .iconUp,
@@ -110,4 +116,41 @@
 .categoryItem:hover,
 .categoryItem:active {
   color: var(--green);
+}
+
+.verbsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.inputRadio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.labelRadio {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  text-align: center;
+  color: var(--black);
+}
+
+.radioIcon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+
+.off {
+  fill: none;
+  stroke: rgba(18, 20, 23, 0.2);
 }
