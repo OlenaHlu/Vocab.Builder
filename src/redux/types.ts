@@ -27,6 +27,16 @@ export type Word = {
   isIrregular: boolean;
 };
 
+export type UserWord = {
+  _id: string;
+  en: string;
+  ua: string;
+  category: Category;
+  isIrregular: boolean;
+  owner: string;
+  progress: number;
+};
+
 export type WordsRequestParams = {
   keyword?: string;
   category?: Category;
@@ -37,6 +47,13 @@ export type WordsRequestParams = {
 
 export type WordsResponse = {
   results: Word[];
+  totalPages: number;
+  page: number;
+  perPage: number;
+};
+
+export type UserWordsResponse = {
+  results: UserWord[];
   totalPages: number;
   page: number;
   perPage: number;

@@ -1,9 +1,15 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { getAllWords } from "./operations";
-import { type WordsResponse, type Word } from "../types";
+import { getAllWords, getUserWords } from "./operations";
+import {
+  type WordsResponse,
+  type UserWordsResponse,
+  type Word,
+  type UserWord,
+} from "../types";
 
 export type WordsState = {
   words: Word[];
+  userWords: UserWord[];
   totalPages: number;
   page: number;
   perPage: number;
@@ -13,11 +19,22 @@ export type WordsState = {
 
 const initialState: WordsState = {
   words: [],
+  userWords: [],
   totalPages: 1,
   page: 1,
   perPage: 7,
   error: null,
   isLoading: false,
+};
+
+const handlePending = (state: WordsState) => {
+  state.isLoading = true;
+  state.error = null;
+};
+
+const handleRejected = (state: WordsState, action: PayloadAction<any>) => {
+  state.isLoading = false;
+  state.error = action.payload ?? "Something went wrong";
 };
 
 const wordsSlice = createSlice({
@@ -30,10 +47,7 @@ const wordsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getAllWords.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
+      .addCase(getAllWords.pending, handlePending)
       .addCase(
         getAllWords.fulfilled,
         (state, action: PayloadAction<WordsResponse>) => {
@@ -44,10 +58,19 @@ const wordsSlice = createSlice({
           state.perPage = action.payload.perPage;
         }
       )
-      .addCase(getAllWords.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload as string;
-      });
+      .addCase(getAllWords.rejected, handleRejected)
+      .addCase(getUserWords.pending, handlePending)
+      .addCase(
+        getUserWords.fulfilled,
+        (state, action: PayloadAction<UserWordsResponse>) => {
+          state.isLoading = false;
+          state.userWords = action.payload.results;
+          state.page = action.payload.page;
+          state.perPage = action.payload.perPage;
+          state.totalPages = action.payload.totalPages;
+        }
+      )
+      .addCase(getUserWords.rejected, handleRejected);
   },
 });
 
