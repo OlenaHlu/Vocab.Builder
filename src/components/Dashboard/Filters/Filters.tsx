@@ -40,7 +40,9 @@ const Filters = () => {
   };
   const toggleDropDown = () => setIsOpen((prev) => !prev);
 
-  // const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {};
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSearchQuery(e.target.value));
+  };
 
   const handleVerbType = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setVerbType(e.target.value));
@@ -55,7 +57,7 @@ const Filters = () => {
             type="text"
             value={searchQuery}
             placeholder="Find the word"
-            // onChange={handleSearch}
+            onChange={handleSearch}
           />
           <Icon iconName="search" className={css.iconSearch} />
         </div>
