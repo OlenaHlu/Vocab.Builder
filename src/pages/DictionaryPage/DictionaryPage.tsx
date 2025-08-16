@@ -29,7 +29,7 @@ const DictionaryPage = () => {
         <Dashboard />
         {isLoading && <p>Loading...</p>}
         {error && <p>Failed to load words: {error}</p>}
-        {!isLoading && !error && hasWords && <p>You have no own words yet</p>}
+        {!isLoading && !error && !hasWords && <p>You have no own words yet</p>}
         {!isLoading && !error && hasWords && (
           <OwnWordsTable userWords={userWords} />
         )}
