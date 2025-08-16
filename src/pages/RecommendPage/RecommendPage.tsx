@@ -1,10 +1,37 @@
 import Header from "../../components/Header/Header";
+import Dashboard from "../../components/Dashboard/Dashboard";
+import AllWordTablle from "../../components/WordsTables/AllWordsTable/AllWordsTable";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useEffect } from "react";
+import {
+  selectWords,
+  selectWordsIsLoading,
+  selectWordsError,
+} from "../../redux/words/selectors";
+import { getAllWords } from "../../redux/words/operations";
 
 const RecommendPage = () => {
+  const dispatch = useAppDispatch();
+  const allWords = useAppSelector(selectWords);
+  const isLoading = useAppSelector(selectWordsIsLoading);
+  const error = useAppSelector(selectWordsError);
+  useEffect(() => {
+    dispatch(getAllWords());
+  }, [dispatch]);
   return (
     <>
       <Header />
-      <p>Recommend Page</p>
+      <main>
+        <Dashboard />
+        {isLoading && <p>Loading...</p>}
+        {error && <p>Failed to load words: {error}</p>}
+        {!isLoading && !error && allWords.length === 0 && (
+          <p>You have no own words yet</p>
+        )}
+        {!isLoading && !error && allWords.length > 0 && (
+          <AllWordTablle allWords={allWords} />
+        )}
+      </main>
     </>
   );
 };

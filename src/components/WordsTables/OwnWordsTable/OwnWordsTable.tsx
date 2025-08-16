@@ -5,18 +5,18 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useMemo } from "react";
-import { type UserWord } from "../../redux/types";
+import { type UserWord } from "../../../redux/types";
 
 // import ProgressBar from "./ProgressBar/ProgressBar";
 // import ActionsBtn from "./ActionsBtn/ActionsBtn";
 
-type WordsTableProps = {
-  words: UserWord[];
+type OwnWordsTableProps = {
+  userWords: UserWord[];
 };
 
 const columnHelper = createColumnHelper<UserWord>();
 
-const WordsTable = ({ words }: WordsTableProps) => {
+const OwnWordsTable = ({ userWords }: OwnWordsTableProps) => {
   const columns = useMemo(
     () => [
       columnHelper.accessor("en", { header: "Word" }),
@@ -37,7 +37,7 @@ const WordsTable = ({ words }: WordsTableProps) => {
   );
 
   const table = useReactTable({
-    data: words,
+    data: userWords,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
@@ -77,4 +77,4 @@ const WordsTable = ({ words }: WordsTableProps) => {
   );
 };
 
-export default WordsTable;
+export default OwnWordsTable;
