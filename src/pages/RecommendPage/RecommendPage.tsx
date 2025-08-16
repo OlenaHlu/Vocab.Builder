@@ -18,6 +18,9 @@ const RecommendPage = () => {
   useEffect(() => {
     dispatch(getAllWords());
   }, [dispatch]);
+
+  const hasWords = Array.isArray(allWords) && allWords.length > 0;
+
   return (
     <>
       <Header />
@@ -25,10 +28,8 @@ const RecommendPage = () => {
         <Dashboard />
         {isLoading && <p>Loading...</p>}
         {error && <p>Failed to load words: {error}</p>}
-        {!isLoading && !error && allWords.length === 0 && (
-          <p>You have no own words yet</p>
-        )}
-        {!isLoading && !error && allWords.length > 0 && (
+        {!isLoading && !error && hasWords && <p>You have no own words yet</p>}
+        {!isLoading && !error && hasWords && (
           <AllWordTablle allWords={allWords} />
         )}
       </main>
