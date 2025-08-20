@@ -1,6 +1,7 @@
 import Header from "../../components/Header/Header";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import AllWordTablle from "../../components/WordsTables/AllWordsTable/AllWordsTable";
+import WordsPagination from "../../components/WordsPagination/WordsPagination";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useEffect } from "react";
 import {
@@ -32,6 +33,7 @@ const RecommendPage = () => {
         {!isLoading && !error && hasWords && (
           <AllWordTablle allWords={allWords} />
         )}
+        <WordsPagination variant="all" />
       </main>
     </>
   );
