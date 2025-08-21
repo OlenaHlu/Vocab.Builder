@@ -11,6 +11,7 @@ import {
 } from "../../redux/words/selectors";
 import { setPage } from "../../redux/words/slice";
 import { getAllWords, getUserWords } from "../../redux/words/operations";
+import { useCallback } from "react";
 
 type WordsPaginationProps = {
   variant: "all" | "user";
@@ -18,19 +19,22 @@ type WordsPaginationProps = {
 
 const WordsPagination = ({ variant }: WordsPaginationProps) => {
   const dispatch = useAppDispatch();
-  const page = useAppSelector(selectPage);
-  const totalPages = useAppSelector(selectTotalPages);
-  const perPage = useAppSelector(selectPerPage);
+  const page = useAppSelector(selectPage) || 1;
+  const totalPages = useAppSelector(selectTotalPages) || 1;
+  const perPage = useAppSelector(selectPerPage) || 7;
 
-  const handleChangePage = (_: React.ChangeEvent<unknown>, value: number) => {
-    dispatch(setPage(value));
+  const handleChangePage = useCallback(
+    (_: React.ChangeEvent<unknown>, value: number) => {
+      dispatch(setPage(value));
 
-    if (variant === "all") {
-      dispatch(getAllWords({ page: value, limit: perPage }));
-    } else {
-      dispatch(getUserWords({ page: value, limit: perPage }));
-    }
-  };
+      if (variant === "all") {
+        dispatch(getAllWords({ page: value, limit: perPage }));
+      } else {
+        dispatch(getUserWords({ page: value, limit: perPage }));
+      }
+    },
+    [dispatch, variant, perPage]
+  );
   return (
     <Stack spacing={2}>
       <Pagination
@@ -40,8 +44,6 @@ const WordsPagination = ({ variant }: WordsPaginationProps) => {
         shape="rounded"
         siblingCount={0}
         boundaryCount={1}
-        showFirstButton
-        showLastButton
         variant="outlined"
         renderItem={(item) => (
           <PaginationItem
@@ -52,6 +54,8 @@ const WordsPagination = ({ variant }: WordsPaginationProps) => {
             {...item}
           />
         )}
+        showFirstButton
+        showLastButton
       />
     </Stack>
   );
