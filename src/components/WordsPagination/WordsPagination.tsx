@@ -36,7 +36,14 @@ const WordsPagination = ({ variant }: WordsPaginationProps) => {
     [dispatch, variant, perPage]
   );
   return (
-    <Stack spacing={2}>
+    <Stack
+      direction="row"
+      spacing={{ xs: 1, sm: 2, md: 3 }}
+      justifyContent="center"
+      sx={{
+        p: { xs: "32px 0px", sm: "28px 0 48px 0", md: "28px 0 48px 0" },
+      }}
+    >
       <Pagination
         count={totalPages}
         page={page}
@@ -45,6 +52,11 @@ const WordsPagination = ({ variant }: WordsPaginationProps) => {
         siblingCount={0}
         boundaryCount={1}
         variant="outlined"
+        sx={{
+          "& .MuiPagination-ul": {
+            gap: { xs: "2px", sm: "5px", md: "7px" },
+          },
+        }}
         renderItem={(item) => (
           <PaginationItem
             slots={{
@@ -52,6 +64,14 @@ const WordsPagination = ({ variant }: WordsPaginationProps) => {
               last: KeyboardDoubleArrowRightIcon,
             }}
             {...item}
+            sx={{
+              borderRadius: "8px",
+              border: "1px solid rgba(18, 20, 23, 0.1);",
+              "&.Mui-selected": {
+                backgroundColor: "var(--green)",
+                color: "var(--white)",
+              },
+            }}
           />
         )}
         showFirstButton
