@@ -1,3 +1,5 @@
+import css from "./AllWordsTable.module.css";
+
 import {
   createColumnHelper,
   flexRender,
@@ -5,7 +7,10 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useMemo } from "react";
+import { useAppDispatch } from "../../../redux/hooks";
 import { type Word } from "../../../redux/types";
+import { addWordById } from "../../../redux/words/operations";
+import Icon from "../../common/Icon";
 
 type AllWordTablleProps = {
   allWords: Word[];
@@ -14,14 +19,27 @@ type AllWordTablleProps = {
 const columnHelper = createColumnHelper<Word>();
 
 const AllWordTablle = ({ allWords }: AllWordTablleProps) => {
+  const dispatch = useAppDispatch();
+
   const columns = useMemo(
     () => [
       columnHelper.accessor("en", { header: "Word" }),
       columnHelper.accessor("ua", { header: "Translation" }),
       columnHelper.accessor("category", { header: "Category" }),
-      columnHelper.display({ id: "actions", header: "", cell: () => "Action" }),
+      columnHelper.display({
+        id: "actions",
+        header: "",
+        cell: ({ row }) => (
+          <button
+            onClick={() => dispatch(addWordById({ id: row.original._id }))}
+            className={css.errowBtn}
+          >
+            <Icon iconName="arrow" className={css.icon} />
+          </button>
+        ),
+      }),
     ],
-    []
+    [dispatch]
   );
 
   const table = useReactTable({

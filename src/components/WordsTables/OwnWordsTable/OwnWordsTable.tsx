@@ -29,8 +29,9 @@ const OwnWordsTable = ({ userWords }: OwnWordsTableProps) => {
       columnHelper.display({
         id: "actions",
         header: "",
-        //   cell: ({ row }) => <ActionsBtn />,
-        cell: () => "Actions",
+        cell: ({ row }) => (
+          <button onClick={() => console.log(row.original)}>...</button>
+        ),
       }),
     ],
     []
