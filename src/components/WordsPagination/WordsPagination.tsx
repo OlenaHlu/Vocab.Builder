@@ -65,11 +65,17 @@ const WordsPagination = ({ variant }: WordsPaginationProps) => {
             }}
             {...item}
             sx={{
+              fontSize: "13px",
+              fontFamily: "var(--font-family)",
+              fontWeight: "600",
               borderRadius: "8px",
               border: "1px solid rgba(18, 20, 23, 0.1);",
               "&.Mui-selected": {
                 backgroundColor: "var(--green)",
                 color: "var(--white)",
+              },
+              "&:hover": {
+                backgroundColor: "var(--light-green)",
               },
             }}
           />

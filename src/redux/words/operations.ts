@@ -4,6 +4,7 @@ import {
   type WordsResponse,
   type WordsRequestParams,
   type UserWordsResponse,
+  type AddNewWordResponse,
 } from "../types";
 import axios from "axios";
 
@@ -36,6 +37,24 @@ export const getUserWords = createAsyncThunk<
       {
         params,
       }
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+    return rejectWithValue("An unexpected error occured.");
+  }
+});
+
+export const addWordById = createAsyncThunk<
+  AddNewWordResponse,
+  { id: string },
+  { rejectValue: string }
+>("words/addwordById", async ({ id }, { rejectWithValue }) => {
+  try {
+    const response = await authenticatedAxios.post<AddNewWordResponse>(
+      `words/add/${id}`
     );
     return response.data;
   } catch (error) {

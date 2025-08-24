@@ -9,6 +9,7 @@ import {
 } from "../../redux/words/selectors";
 import { getUserWords } from "../../redux/words/operations";
 import OwnWordsTable from "../../components/WordsTables/OwnWordsTable/OwnWordsTable";
+import WordsPagination from "../../components/WordsPagination/WordsPagination";
 
 const DictionaryPage = () => {
   const dispatch = useAppDispatch();
@@ -31,7 +32,10 @@ const DictionaryPage = () => {
         {error && <p>Failed to load words: {error}</p>}
         {!isLoading && !error && !hasWords && <p>You have no own words yet</p>}
         {!isLoading && !error && hasWords && (
-          <OwnWordsTable userWords={userWords} />
+          <>
+            <OwnWordsTable userWords={userWords} />
+            <WordsPagination variant="user" />
+          </>
         )}
       </main>
     </>

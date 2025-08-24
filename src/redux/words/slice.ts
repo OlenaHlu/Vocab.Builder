@@ -1,10 +1,11 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { getAllWords, getUserWords } from "./operations";
+import { getAllWords, getUserWords, addWordById } from "./operations";
 import {
   type WordsResponse,
   type UserWordsResponse,
   type Word,
   type UserWord,
+  type AddNewWordResponse,
 } from "../types";
 
 export type WordsState = {
@@ -32,7 +33,10 @@ const handlePending = (state: WordsState) => {
   state.error = null;
 };
 
-const handleRejected = (state: WordsState, action: PayloadAction<any>) => {
+const handleRejected = (
+  state: WordsState,
+  action: PayloadAction<string | undefined>
+) => {
   state.isLoading = false;
   state.error = action.payload ?? "Something went wrong";
 };
@@ -70,7 +74,22 @@ const wordsSlice = createSlice({
           state.totalPages = action.payload.totalPages;
         }
       )
-      .addCase(getUserWords.rejected, handleRejected);
+      .addCase(getUserWords.rejected, handleRejected)
+      .addCase(addWordById.pending, handlePending)
+      .addCase(
+        addWordById.fulfilled,
+        (state, action: PayloadAction<AddNewWordResponse>) => {
+          state.isLoading = false;
+          const newWord = action.payload;
+          const exist = state.userWords.some(
+            (word) => word._id === newWord._id
+          );
+          if (!exist) {
+            state.userWords.push(newWord);
+          }
+        }
+      )
+      .addCase(addWordById.rejected, handleRejected);
   },
 });
 

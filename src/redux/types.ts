@@ -4,12 +4,6 @@ export type User = {
   name: string;
 };
 
-export type AuthResponse = {
-  email: string;
-  name: string;
-  token: string;
-};
-
 export type CurrentUser = {
   _id: string;
   email: string;
@@ -45,6 +39,14 @@ export type WordsRequestParams = {
   limit?: number;
 };
 
+//responses type
+
+export type AuthResponse = {
+  email: string;
+  name: string;
+  token: string;
+};
+
 export type WordsResponse = {
   results: Word[];
   totalPages: number;
@@ -57,4 +59,14 @@ export type UserWordsResponse = {
   totalPages: number;
   page: number;
   perPage: number;
+};
+
+export type AddNewWordResponse = {
+  _id: string;
+  en: string;
+  ua: string;
+  category: string;
+  isIrregular: boolean;
+  owner: string;
+  progress: number;
 };
