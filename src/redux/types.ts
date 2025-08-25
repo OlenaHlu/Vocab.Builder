@@ -39,6 +39,13 @@ export type WordsRequestParams = {
   limit?: number;
 };
 
+export type EditWordRequest = {
+  en: string;
+  ua: string;
+  category: string;
+  isIrregular?: boolean;
+};
+
 //responses type
 
 export type AuthResponse = {
@@ -62,6 +69,16 @@ export type UserWordsResponse = {
 };
 
 export type AddNewWordResponse = {
+  _id: string;
+  en: string;
+  ua: string;
+  category: string;
+  isIrregular: boolean;
+  owner: string;
+  progress: number;
+};
+
+export type EditWordResponse = {
   _id: string;
   en: string;
   ua: string;

@@ -8,7 +8,7 @@ import { useMemo } from "react";
 import { type UserWord } from "../../../redux/types";
 
 // import ProgressBar from "./ProgressBar/ProgressBar";
-// import ActionsBtn from "./ActionsBtn/ActionsBtn";
+import ActionsMenu from "./ActionsMenu/ActionsMenu";
 
 type OwnWordsTableProps = {
   userWords: UserWord[];
@@ -30,7 +30,10 @@ const OwnWordsTable = ({ userWords }: OwnWordsTableProps) => {
         id: "actions",
         header: "",
         cell: ({ row }) => (
-          <button onClick={() => console.log(row.original)}>...</button>
+          <ActionsMenu
+            onEdit={() => console.log("Edit", row.original)}
+            onDelete={() => console.log("Delete", row.original)}
+          />
         ),
       }),
     ],
