@@ -4,11 +4,13 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { type UserWord } from "../../../redux/types";
-
+import { editWord } from "../../../redux/words/operations";
+import { useAppDispatch } from "../../../redux/hooks";
 // import ProgressBar from "./ProgressBar/ProgressBar";
 import ActionsMenu from "./ActionsMenu/ActionsMenu";
+import EditWordModal from "../../Modals/UserModal/EditWordModal/EditWordModal";
 
 type OwnWordsTableProps = {
   userWords: UserWord[];
@@ -17,6 +19,28 @@ type OwnWordsTableProps = {
 const columnHelper = createColumnHelper<UserWord>();
 
 const OwnWordsTable = ({ userWords }: OwnWordsTableProps) => {
+  const dispatch = useAppDispatch();
+  const [editingWord, setEditingWord] = useState<UserWord | null>(null);
+
+  const handleSave = async (updatedData: { en: string; ua: string }) => {
+    if (!editingWord) return;
+    try {
+      await dispatch(
+        editWord({
+          id: editingWord._id,
+          data: {
+            ...updatedData,
+            category: editingWord.category,
+          },
+        })
+      ).unwrap();
+    } catch (error) {
+      console.error("Edit failed", error);
+    } finally {
+      setEditingWord(null);
+    }
+  };
+
   const columns = useMemo(
     () => [
       columnHelper.accessor("en", { header: "Word" }),
@@ -31,7 +55,7 @@ const OwnWordsTable = ({ userWords }: OwnWordsTableProps) => {
         header: "",
         cell: ({ row }) => (
           <ActionsMenu
-            onEdit={() => console.log("Edit", row.original)}
+            onEdit={() => setEditingWord(row.original)}
             onDelete={() => console.log("Delete", row.original)}
           />
         ),
@@ -77,6 +101,14 @@ const OwnWordsTable = ({ userWords }: OwnWordsTableProps) => {
           ))}
         </tbody>
       </table>
+
+      {editingWord && (
+        <EditWordModal
+          word={editingWord}
+          onClose={() => setEditingWord(null)}
+          onSave={handleSave}
+        />
+      )}
     </div>
   );
 };
