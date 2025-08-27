@@ -87,3 +87,8 @@ export type EditWordResponse = {
   owner: string;
   progress: number;
 };
+
+export type DeleteWordResponse = {
+  _id: string;
+  message: string;
+};

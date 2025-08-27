@@ -27,3 +27,18 @@ export const loginSchema = Yup.object().shape({
     )
     .required("Password is Required"),
 });
+
+export const editWordSchema = Yup.object().shape({
+  en: Yup.string()
+    .required("English word is required")
+    .matches(
+      /\b[A-Za-z'-]+(?:\s+[A-Za-z'-]+)*\b/,
+      "Only English letters, spaces, ' and - are allowed"
+    ),
+  ua: Yup.string()
+    .required("Translation is required")
+    .matches(
+      /^(?![A-Za-z])[А-ЯІЄЇҐґа-яієїʼ\s]+$/,
+      "Only Ukrainian letters and spaces are allowed"
+    ),
+});

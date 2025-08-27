@@ -1,11 +1,19 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { getAllWords, getUserWords, addWordById } from "./operations";
+import {
+  getAllWords,
+  getUserWords,
+  addWordById,
+  editWord,
+  deleteWord,
+} from "./operations";
 import {
   type WordsResponse,
   type UserWordsResponse,
   type Word,
   type UserWord,
   type AddNewWordResponse,
+  type EditWordResponse,
+  type DeleteWordResponse,
 } from "../types";
 
 export type WordsState = {
@@ -51,6 +59,7 @@ const wordsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      //get all words
       .addCase(getAllWords.pending, handlePending)
       .addCase(
         getAllWords.fulfilled,
@@ -63,6 +72,8 @@ const wordsSlice = createSlice({
         }
       )
       .addCase(getAllWords.rejected, handleRejected)
+
+      //get user words
       .addCase(getUserWords.pending, handlePending)
       .addCase(
         getUserWords.fulfilled,
@@ -75,6 +86,8 @@ const wordsSlice = createSlice({
         }
       )
       .addCase(getUserWords.rejected, handleRejected)
+
+      //add word by id from all words to user
       .addCase(addWordById.pending, handlePending)
       .addCase(
         addWordById.fulfilled,
@@ -89,7 +102,36 @@ const wordsSlice = createSlice({
           }
         }
       )
-      .addCase(addWordById.rejected, handleRejected);
+      .addCase(addWordById.rejected, handleRejected)
+
+      //edit word
+      .addCase(editWord.pending, handlePending)
+      .addCase(
+        editWord.fulfilled,
+        (state, action: PayloadAction<EditWordResponse>) => {
+          state.isLoading = false;
+          const updatedWord = action.payload;
+          const index = state.userWords.findIndex(
+            (word) => word._id === updatedWord._id
+          );
+          if (index !== -1) {
+            state.userWords[index] = updatedWord;
+          }
+        }
+      )
+      .addCase(editWord.rejected, handleRejected)
+
+      //delete word
+      .addCase(deleteWord.pending, handlePending)
+      .addCase(
+        deleteWord.fulfilled,
+        (state, action: PayloadAction<DeleteWordResponse>) => {
+          state.isLoading = false;
+          state.userWords = state.userWords.filter(
+            (word) => word._id !== action.payload._id
+          );
+        }
+      );
   },
 });
 

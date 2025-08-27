@@ -21,6 +21,7 @@ const ActionsMenu = ({ onEdit, onDelete }: ActionsMenuProps) => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
   return (
     <div className={css.wrapper} ref={menuRef}>
       <button

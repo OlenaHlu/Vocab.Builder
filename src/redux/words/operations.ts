@@ -5,6 +5,9 @@ import {
   type WordsRequestParams,
   type UserWordsResponse,
   type AddNewWordResponse,
+  type EditWordRequest,
+  type EditWordResponse,
+  type DeleteWordResponse,
 } from "../types";
 import axios from "axios";
 
@@ -55,6 +58,43 @@ export const addWordById = createAsyncThunk<
   try {
     const response = await authenticatedAxios.post<AddNewWordResponse>(
       `words/add/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+    return rejectWithValue("An unexpected error occured.");
+  }
+});
+
+export const editWord = createAsyncThunk<
+  EditWordResponse,
+  { id: string; data: EditWordRequest },
+  { rejectValue: string }
+>("words/editWord", async ({ id, data }, { rejectWithValue }) => {
+  try {
+    const response = await authenticatedAxios.patch<EditWordResponse>(
+      `words/edit/${id}`,
+      data
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+    return rejectWithValue("An unexpected error occured.");
+  }
+});
+
+export const deleteWord = createAsyncThunk<
+  DeleteWordResponse,
+  { id: string },
+  { rejectValue: string }
+>("words/deleteWord", async ({ id }, { rejectWithValue }) => {
+  try {
+    const response = await authenticatedAxios.delete<DeleteWordResponse>(
+      `words/delete/${id}`
     );
     return response.data;
   } catch (error) {
