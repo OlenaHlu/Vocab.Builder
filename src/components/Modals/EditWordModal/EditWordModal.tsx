@@ -1,11 +1,11 @@
 import css from "./EditWordModal.module.css";
 
-import { type UserWord } from "../../../../redux/types";
-import { editWordSchema } from "../../../../utils/validation";
+import { type UserWord } from "../../../redux/types";
+import { editWordSchema } from "../../../utils/validation";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
-import ShowToast from "../../../common/ShowToast";
-import Icon from "../../../common/Icon";
+import ShowToast from "../../common/ShowToast";
+import Icon from "../../common/Icon";
 
 type EditWordModalProps = {
   word: UserWord;

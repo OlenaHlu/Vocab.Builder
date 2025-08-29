@@ -6,11 +6,12 @@ import {
 } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
 import { type UserWord } from "../../../redux/types";
-import { editWord } from "../../../redux/words/operations";
+import { editWord, deleteWord } from "../../../redux/words/operations";
 import { useAppDispatch } from "../../../redux/hooks";
 // import ProgressBar from "./ProgressBar/ProgressBar";
 import ActionsMenu from "./ActionsMenu/ActionsMenu";
-import EditWordModal from "../../Modals/UserModal/EditWordModal/EditWordModal";
+import EditWordModal from "../../Modals/EditWordModal/EditWordModal";
+import DeleteWordModal from "../../Modals/DeleteWordModal/DeleteWordModal";
 
 type OwnWordsTableProps = {
   userWords: UserWord[];
@@ -21,6 +22,7 @@ const columnHelper = createColumnHelper<UserWord>();
 const OwnWordsTable = ({ userWords }: OwnWordsTableProps) => {
   const dispatch = useAppDispatch();
   const [editingWord, setEditingWord] = useState<UserWord | null>(null);
+  const [deletingWord, setDeletingWord] = useState<UserWord | null>(null);
 
   const handleSave = async (updatedData: { en: string; ua: string }) => {
     if (!editingWord) return;
@@ -41,6 +43,17 @@ const OwnWordsTable = ({ userWords }: OwnWordsTableProps) => {
     }
   };
 
+  const handleDelete = async () => {
+    if (!deletingWord) return;
+    try {
+      dispatch(deleteWord({ id: deletingWord._id })).unwrap();
+    } catch (error) {
+      console.error("Delete failed", error);
+    } finally {
+      setDeletingWord(null);
+    }
+  };
+
   const columns = useMemo(
     () => [
       columnHelper.accessor("en", { header: "Word" }),
@@ -56,7 +69,7 @@ const OwnWordsTable = ({ userWords }: OwnWordsTableProps) => {
         cell: ({ row }) => (
           <ActionsMenu
             onEdit={() => setEditingWord(row.original)}
-            onDelete={() => console.log("Delete", row.original)}
+            onDelete={() => setDeletingWord(row.original)}
           />
         ),
       }),
@@ -107,6 +120,12 @@ const OwnWordsTable = ({ userWords }: OwnWordsTableProps) => {
           word={editingWord}
           onClose={() => setEditingWord(null)}
           onSave={handleSave}
+        />
+      )}
+      {deletingWord && (
+        <DeleteWordModal
+          onClose={() => setDeletingWord(null)}
+          onConfirm={handleDelete}
         />
       )}
     </div>
