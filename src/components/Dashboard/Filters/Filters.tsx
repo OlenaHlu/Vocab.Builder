@@ -5,14 +5,9 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import {
   selectCategories,
   selectSelectedCategory,
-  selectSearchQuery,
   selectVerbType,
 } from "../../../redux/filters/selectors";
-import {
-  setCategory,
-  setVerbType,
-  setSearchQuery,
-} from "../../../redux/filters/slice";
+import { setCategory, setVerbType } from "../../../redux/filters/slice";
 import Icon from "../../common/Icon";
 
 const Filters = () => {
@@ -21,7 +16,6 @@ const Filters = () => {
   const categories = useAppSelector(selectCategories);
 
   const selectedCategory = useAppSelector(selectSelectedCategory);
-  const searchQuery = useAppSelector(selectSearchQuery);
   const verbType = useAppSelector(selectVerbType);
 
   useEffect(() => {
@@ -30,7 +24,6 @@ const Filters = () => {
 
   useEffect(() => {
     dispatch(setCategory("all"));
-    dispatch(setSearchQuery(""));
     dispatch(setVerbType(""));
   }, [dispatch]);
 
@@ -40,10 +33,6 @@ const Filters = () => {
   };
   const toggleDropDown = () => setIsOpen((prev) => !prev);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setSearchQuery(e.target.value));
-  };
-
   const handleVerbType = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setVerbType(e.target.value));
   };
@@ -51,16 +40,6 @@ const Filters = () => {
   return (
     <>
       <form className={css.form}>
-        <div className={css.inputBlock}>
-          <input
-            className={css.input}
-            type="text"
-            value={searchQuery}
-            placeholder="Find the word"
-            onChange={handleSearch}
-          />
-          <Icon iconName="search" className={css.iconSearch} />
-        </div>
         <div className={css.filter}>
           <button
             className={css.categoriesBtn}
@@ -71,9 +50,9 @@ const Filters = () => {
 
             <span>
               {isOpen ? (
-                <Icon iconName="toggle" className={css.iconUp} />
+                <Icon iconName="down" className={css.iconUp} />
               ) : (
-                <Icon iconName="toggle" className={css.iconDown} />
+                <Icon iconName="down" className={css.iconDown} />
               )}
             </span>
           </button>

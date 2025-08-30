@@ -1,7 +1,7 @@
 import css from "./EditWordModal.module.css";
 
 import { type UserWord } from "../../../redux/types";
-import { editWordSchema } from "../../../utils/validation";
+import { inputWordSchema } from "../../../utils/validation";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
 import ShowToast from "../../common/ShowToast";
@@ -10,7 +10,7 @@ import Icon from "../../common/Icon";
 type EditWordModalProps = {
   word: UserWord;
   onClose: () => void;
-  onSave: (updatedData: { en: string; ua: string }) => void;
+  onSave: (updatedData: { ua: string; en: string }) => void;
 };
 
 const EditWordModal = ({ word, onClose, onSave }: EditWordModalProps) => {
@@ -23,7 +23,7 @@ const EditWordModal = ({ word, onClose, onSave }: EditWordModalProps) => {
 
         <Formik
           initialValues={{ en: word.en, ua: word.ua }}
-          validationSchema={editWordSchema}
+          validationSchema={inputWordSchema}
           onSubmit={(values) => {
             onSave(values);
             ShowToast({

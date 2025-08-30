@@ -5,6 +5,7 @@ import {
   addWordById,
   editWord,
   deleteWord,
+  createNewWord,
 } from "./operations";
 import {
   type WordsResponse,
@@ -14,6 +15,7 @@ import {
   type AddNewWordResponse,
   type EditWordResponse,
   type DeleteWordResponse,
+  type CreateNewWordResponse,
 } from "../types";
 
 export type WordsState = {
@@ -131,7 +133,18 @@ const wordsSlice = createSlice({
             (word) => word._id !== action.payload._id
           );
         }
-      );
+      )
+
+      //create word
+      .addCase(createNewWord.pending, handlePending)
+      .addCase(
+        createNewWord.fulfilled,
+        (state, action: PayloadAction<CreateNewWordResponse>) => {
+          state.isLoading = false;
+          state.userWords.push(action.payload);
+        }
+      )
+      .addCase(createNewWord.rejected, handleRejected);
   },
 });
 

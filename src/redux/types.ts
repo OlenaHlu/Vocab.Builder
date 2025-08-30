@@ -39,12 +39,16 @@ export type WordsRequestParams = {
   limit?: number;
 };
 
-export type EditWordRequest = {
+export type WordRequest = {
   en: string;
   ua: string;
   category: string;
   isIrregular?: boolean;
 };
+
+export type EditWordRequest = WordRequest;
+
+export type CreateNewWordRequest = WordRequest;
 
 //responses type
 
@@ -68,7 +72,7 @@ export type UserWordsResponse = {
   perPage: number;
 };
 
-export type AddNewWordResponse = {
+export type ActionsWordResponse = {
   _id: string;
   en: string;
   ua: string;
@@ -78,17 +82,13 @@ export type AddNewWordResponse = {
   progress: number;
 };
 
-export type EditWordResponse = {
-  _id: string;
-  en: string;
-  ua: string;
-  category: string;
-  isIrregular: boolean;
-  owner: string;
-  progress: number;
-};
+export type AddNewWordResponse = ActionsWordResponse;
+
+export type EditWordResponse = ActionsWordResponse;
 
 export type DeleteWordResponse = {
   _id: string;
   message: string;
 };
+
+export type CreateNewWordResponse = ActionsWordResponse;

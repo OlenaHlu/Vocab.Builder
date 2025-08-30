@@ -8,6 +8,8 @@ import {
   type EditWordRequest,
   type EditWordResponse,
   type DeleteWordResponse,
+  type CreateNewWordRequest,
+  type CreateNewWordResponse,
 } from "../types";
 import axios from "axios";
 
@@ -95,6 +97,25 @@ export const deleteWord = createAsyncThunk<
   try {
     const response = await authenticatedAxios.delete<DeleteWordResponse>(
       `words/delete/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+    return rejectWithValue("An unexpected error occured.");
+  }
+});
+
+export const createNewWord = createAsyncThunk<
+  CreateNewWordResponse,
+  CreateNewWordRequest,
+  { rejectValue: string }
+>("words/createNewWord", async (params, { rejectWithValue }) => {
+  try {
+    const response = await authenticatedAxios.post<CreateNewWordResponse>(
+      "words/create",
+      params
     );
     return response.data;
   } catch (error) {

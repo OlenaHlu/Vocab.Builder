@@ -28,7 +28,7 @@ export const loginSchema = Yup.object().shape({
     .required("Password is Required"),
 });
 
-export const editWordSchema = Yup.object().shape({
+export const inputWordSchema = Yup.object().shape({
   en: Yup.string()
     .required("English word is required")
     .matches(
