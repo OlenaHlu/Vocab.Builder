@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import {
   selectUserWords,
   selectWordsIsLoading,
-  selectWordsError,
 } from "../../redux/words/selectors";
 import { getUserWords } from "../../redux/words/operations";
 import OwnWordsTable from "../../components/WordsTables/OwnWordsTable/OwnWordsTable";
@@ -15,7 +14,6 @@ const DictionaryPage = () => {
   const dispatch = useAppDispatch();
   const userWords = useAppSelector(selectUserWords);
   const isLoading = useAppSelector(selectWordsIsLoading);
-  const error = useAppSelector(selectWordsError);
 
   useEffect(() => {
     dispatch(getUserWords());
@@ -29,11 +27,10 @@ const DictionaryPage = () => {
       <main>
         <Dashboard />
         {isLoading && <p>Loading...</p>}
-        {error && <p>Failed to load words: {error}</p>}
-        {!isLoading && !error && !hasWords && <p>You have no own words yet</p>}
-        {!isLoading && !error && hasWords && (
+        {!isLoading && !hasWords && <p>You have no own words yet</p>}
+        {!isLoading && hasWords && (
           <>
-            <OwnWordsTable userWords={userWords} />
+            <OwnWordsTable />
             <WordsPagination variant="user" />
           </>
         )}

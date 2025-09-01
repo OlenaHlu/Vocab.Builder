@@ -87,7 +87,7 @@ export type AddNewWordResponse = ActionsWordResponse;
 export type EditWordResponse = ActionsWordResponse;
 
 export type DeleteWordResponse = {
-  _id: string;
+  id: string;
   message: string;
 };
 

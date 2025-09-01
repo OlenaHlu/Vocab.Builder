@@ -66,7 +66,7 @@ export const addWordById = createAsyncThunk<
     if (axios.isAxiosError(error)) {
       return rejectWithValue(error.response?.data?.message || error.message);
     }
-    return rejectWithValue("An unexpected error occured.");
+    return rejectWithValue("An unexpected error occurred.");
   }
 });
 

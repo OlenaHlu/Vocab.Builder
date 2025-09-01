@@ -7,37 +7,43 @@ import {
 import { useMemo, useState } from "react";
 import { type UserWord } from "../../../redux/types";
 import { editWord, deleteWord } from "../../../redux/words/operations";
-import { useAppDispatch } from "../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { selectUserWords } from "../../../redux/words/selectors";
 // import ProgressBar from "./ProgressBar/ProgressBar";
 import ActionsMenu from "./ActionsMenu/ActionsMenu";
 import EditWordModal from "../../Modals/EditWordModal/EditWordModal";
 import DeleteWordModal from "../../Modals/DeleteWordModal/DeleteWordModal";
-
-type OwnWordsTableProps = {
-  userWords: UserWord[];
-};
+import ShowToast from "../../common/ShowToast";
 
 const columnHelper = createColumnHelper<UserWord>();
 
-const OwnWordsTable = ({ userWords }: OwnWordsTableProps) => {
+const OwnWordsTable = () => {
   const dispatch = useAppDispatch();
+  const userWords = useAppSelector(selectUserWords);
   const [editingWord, setEditingWord] = useState<UserWord | null>(null);
   const [deletingWord, setDeletingWord] = useState<UserWord | null>(null);
 
   const handleSave = async (updatedData: { en: string; ua: string }) => {
     if (!editingWord) return;
     try {
+      const dataToSend = {
+        en: updatedData.en,
+        ua: updatedData.ua,
+        category: editingWord.category,
+        isIrregular: editingWord.isIrregular,
+      };
       await dispatch(
         editWord({
           id: editingWord._id,
-          data: {
-            ...updatedData,
-            category: editingWord.category,
-          },
+          data: dataToSend,
         })
       ).unwrap();
+      ShowToast({ message: "Word updated successfully", type: "success" });
     } catch (error) {
-      console.error("Edit failed", error);
+      ShowToast({
+        message: "Failed to update word",
+        type: "error",
+      });
     } finally {
       setEditingWord(null);
     }

@@ -28,17 +28,58 @@ export const loginSchema = Yup.object().shape({
     .required("Password is Required"),
 });
 
-export const inputWordSchema = Yup.object().shape({
+export const editWordSchema = Yup.object().shape({
   en: Yup.string()
     .required("English word is required")
     .matches(
       /\b[A-Za-z'-]+(?:\s+[A-Za-z'-]+)*\b/,
       "Only English letters, spaces, ' and - are allowed"
-    ),
+    )
+    .when("isIrregular", {
+      is: true,
+      then: (schema) =>
+        schema.matches(
+          /^\w+-\w+-\w+$/,
+          "The en field must have the format 'wI-wII-wIII' for irregular verbs"
+        ),
+    }),
   ua: Yup.string()
     .required("Translation is required")
     .matches(
       /^(?![A-Za-z])[А-ЯІЄЇҐґа-яієїʼ\s]+$/,
       "Only Ukrainian letters and spaces are allowed"
     ),
+  category: Yup.string().nullable().notRequired(),
+  isIrregular: Yup.boolean().nullable().notRequired(),
+});
+
+export const createWordSchema = Yup.object().shape({
+  en: Yup.string()
+    .required("English word is required")
+    .matches(
+      /\b[A-Za-z'-]+(?:\s+[A-Za-z'-]+)*\b/,
+      "Only English letters, spaces, ' and - are allowed"
+    )
+    .when("isIrregular", {
+      is: true,
+      then: (schema) =>
+        schema.matches(
+          /^\w+-\w+-\w+$/,
+          "The en field must have the format 'wI-wII-wIII' for irregular verbs"
+        ),
+    }),
+  ua: Yup.string()
+    .required("Translation is required")
+    .matches(
+      /^(?![A-Za-z])[А-ЯІЄЇҐґа-яієїʼ\s]+$/,
+      "Only Ukrainian letters and spaces are allowed"
+    ),
+  category: Yup.string().required(),
+  isIrregular: Yup.boolean().when("category", {
+    is: "verb",
+    then: (schema) =>
+      schema.required(
+        "The isIrregular field is required for the 'verb' category"
+      ),
+  }),
 });

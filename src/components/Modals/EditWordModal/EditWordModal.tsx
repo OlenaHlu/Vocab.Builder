@@ -1,16 +1,15 @@
 import css from "./EditWordModal.module.css";
 
-import { type UserWord } from "../../../redux/types";
-import { inputWordSchema } from "../../../utils/validation";
+import { type UserWord, type WordRequest } from "../../../redux/types";
+import { editWordSchema } from "../../../utils/validation";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
-import ShowToast from "../../common/ShowToast";
 import Icon from "../../common/Icon";
 
 type EditWordModalProps = {
   word: UserWord;
   onClose: () => void;
-  onSave: (updatedData: { ua: string; en: string }) => void;
+  onSave: (updatedData: WordRequest) => Promise<void>;
 };
 
 const EditWordModal = ({ word, onClose, onSave }: EditWordModalProps) => {
@@ -22,15 +21,20 @@ const EditWordModal = ({ word, onClose, onSave }: EditWordModalProps) => {
         </button>
 
         <Formik
-          initialValues={{ en: word.en, ua: word.ua }}
-          validationSchema={inputWordSchema}
-          onSubmit={(values) => {
-            onSave(values);
-            ShowToast({
-              message: "Word updated successfully",
-              type: "success",
-            });
-            onClose();
+          initialValues={{
+            en: word.en,
+            ua: word.ua,
+            category: word.category,
+            isIrregular: word.isIrregular,
+          }}
+          validationSchema={editWordSchema}
+          onSubmit={async (values) => {
+            const updatedWord: WordRequest = {
+              ...word,
+              en: values.en,
+              ua: values.ua,
+            };
+            await onSave(updatedWord);
           }}
         >
           {() => (

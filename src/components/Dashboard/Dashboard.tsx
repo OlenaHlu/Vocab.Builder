@@ -7,12 +7,9 @@ import { selectSearchQuery } from "../../redux/filters/selectors";
 import { selectUserWords } from "../../redux/words/selectors";
 import { setSearchQuery } from "../../redux/filters/slice";
 import { useLocation } from "react-router-dom";
-// import { type CreateNewWordRequest } from "../../redux/types";
-// import { createNewWord } from "../../redux/words/operations";
-// import ShowToast from "../common/ShowToast";
 import Filters from "./Filters/Filters";
 import Icon from "../common/Icon";
-import CreateWordModal from "../Modals/AddWordModal/AddWordModal";
+import AddWordModal from "../Modals/AddWordModal/AddWordModal";
 
 const Dashboard = () => {
   const words = useAppSelector(selectUserWords);
@@ -30,20 +27,9 @@ const Dashboard = () => {
     dispatch(setSearchQuery(e.target.value));
   };
 
-  // const handleCreatedWord = async (newWord: CreateNewWordRequest) => {
-  //   try {
-  //     await dispatch(createNewWord(newWord)).unwrap();
-  //     setIsModalOpen(false);
-  //     ShowToast({
-  //       message: "Word created successfully",
-  //       type: "success",
-  //     });
-  //   } catch (error) {
-  //     ShowToast({ message: "Failed to create word", type: "error" });
-  //     console.error(error);
-  //   }
-  // };
-
+  const handleModalSuccess = () => {
+    setIsModalOpen(false);
+  };
   return (
     <section className={css.dashboardContainer}>
       <div className={css.inputBlock}>
@@ -71,10 +57,9 @@ const Dashboard = () => {
               </button>
             </div>
             {isModalOpen && (
-              <CreateWordModal
-                // word={{ ua: "", en: "", category: "" }}
+              <AddWordModal
                 onClose={() => setIsModalOpen(false)}
-                // onCreate={handleCreatedWord}
+                onCreate={handleModalSuccess}
               />
             )}
           </>

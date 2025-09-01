@@ -130,10 +130,11 @@ const wordsSlice = createSlice({
         (state, action: PayloadAction<DeleteWordResponse>) => {
           state.isLoading = false;
           state.userWords = state.userWords.filter(
-            (word) => word._id !== action.payload._id
+            (word) => word._id !== action.payload.id
           );
         }
       )
+      .addCase(deleteWord.rejected, handleRejected)
 
       //create word
       .addCase(createNewWord.pending, handlePending)

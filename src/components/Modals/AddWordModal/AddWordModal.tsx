@@ -1,16 +1,16 @@
 import css from "./AddWordModal.module.css";
 
-// import { type CreateNewWordRequest } from "../../../redux/types";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
 import Icon from "../../common/Icon";
+import AddWordForm from "./AddWordForm/AddWordForm";
+import { type WordRequest } from "../../../redux/types";
 
 type AddWordModalProps = {
-  // word: CreateNewWordRequest;
   onClose: () => void;
-  // onCreate: (createdData: CreateNewWordRequest) => void;
+  onCreate: (newWord: WordRequest) => void;
 };
 
-const AddWordModal = ({ onClose }: AddWordModalProps) => {
+const AddWordModal = ({ onClose, onCreate }: AddWordModalProps) => {
   return (
     <ModalWrapper onClose={onClose}>
       <div>
@@ -22,6 +22,7 @@ const AddWordModal = ({ onClose }: AddWordModalProps) => {
           Adding a new word to the dictionary is an important step in enriching
           the language base and expanding the vocabulary.
         </p>
+        <AddWordForm onCancel={onClose} onSuccess={onCreate} />
       </div>
     </ModalWrapper>
   );
