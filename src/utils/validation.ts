@@ -11,7 +11,7 @@ export const registrationSchema = Yup.object().shape({
   password: Yup.string()
     .matches(
       /^(?=(?:.*[a-zA-Z]){6})(?=(?:.*\d){1})[a-zA-Z\d]{7}$/,
-      "The password must consist of of 6 English letters and 1 number."
+      "Password must be 7 characters: 6 letters + 1 number"
     )
     .required("Password is Required"),
 });
@@ -39,8 +39,8 @@ export const editWordSchema = Yup.object().shape({
       is: true,
       then: (schema) =>
         schema.matches(
-          /^\w+-\w+-\w+$/,
-          "The en field must have the format 'wI-wII-wIII' for irregular verbs"
+          /^[A-Za-z]+-[A-Za-z]+-[A-Za-z]+$/,
+          "Use the format: base form - past simple - past participle (e.g., go-went-gone)"
         ),
     }),
   ua: Yup.string()
@@ -64,8 +64,8 @@ export const createWordSchema = Yup.object().shape({
       is: true,
       then: (schema) =>
         schema.matches(
-          /^\w+-\w+-\w+$/,
-          "The en field must have the format 'wI-wII-wIII' for irregular verbs"
+          /^[A-Za-z]+-[A-Za-z]+-[A-Za-z]+$/,
+          "Use the format: base form - past simple - past participle (e.g., go-went-gone)"
         ),
     }),
   ua: Yup.string()

@@ -30,6 +30,7 @@ const Dashboard = () => {
   const handleModalSuccess = () => {
     setIsModalOpen(false);
   };
+
   return (
     <section className={css.dashboardContainer}>
       <div className={css.inputBlock}>

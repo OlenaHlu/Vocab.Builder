@@ -11,16 +11,27 @@ import { useAppDispatch } from "../../../redux/hooks";
 import { type Word } from "../../../redux/types";
 import { addWordById } from "../../../redux/words/operations";
 import Icon from "../../common/Icon";
+import ShowToast from "../../common/ShowToast";
 
-type AllWordTablleProps = {
+type AllWordTableProps = {
   allWords: Word[];
 };
 
 const columnHelper = createColumnHelper<Word>();
 
-const AllWordTablle = ({ allWords }: AllWordTablleProps) => {
+const AllWordTable = ({ allWords }: AllWordTableProps) => {
   const dispatch = useAppDispatch();
 
+  const handleAddWord = (id: string) => {
+    dispatch(addWordById({ id }))
+      .unwrap()
+      .then(() => {
+        ShowToast({ message: "Word added successfully", type: "success" });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
   const columns = useMemo(
     () => [
       columnHelper.accessor("en", { header: "Word" }),
@@ -31,7 +42,7 @@ const AllWordTablle = ({ allWords }: AllWordTablleProps) => {
         header: "",
         cell: ({ row }) => (
           <button
-            onClick={() => dispatch(addWordById({ id: row.original._id }))}
+            onClick={() => handleAddWord(row.original._id)}
             className={css.errowBtn}
           >
             <Icon iconName="arrow" className={css.icon} />
@@ -83,4 +94,4 @@ const AllWordTablle = ({ allWords }: AllWordTablleProps) => {
   );
 };
 
-export default AllWordTablle;
+export default AllWordTable;

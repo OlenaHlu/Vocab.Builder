@@ -40,10 +40,7 @@ const OwnWordsTable = () => {
       ).unwrap();
       ShowToast({ message: "Word updated successfully", type: "success" });
     } catch (error) {
-      ShowToast({
-        message: "Failed to update word",
-        type: "error",
-      });
+      console.error("Failed to update word:", error);
     } finally {
       setEditingWord(null);
     }
@@ -53,6 +50,7 @@ const OwnWordsTable = () => {
     if (!deletingWord) return;
     try {
       dispatch(deleteWord({ id: deletingWord._id })).unwrap();
+      ShowToast({ message: "Word deleted successfully", type: "success" });
     } catch (error) {
       console.error("Delete failed", error);
     } finally {
