@@ -6,6 +6,7 @@ import {
   editWord,
   deleteWord,
   createNewWord,
+  getStatistics,
 } from "./operations";
 import {
   type WordsResponse,
@@ -21,6 +22,7 @@ import {
 export type WordsState = {
   words: Word[];
   userWords: UserWord[];
+  wordsToStudy: number;
   totalPages: number;
   page: number;
   perPage: number;
@@ -31,6 +33,7 @@ export type WordsState = {
 const initialState: WordsState = {
   words: [],
   userWords: [],
+  wordsToStudy: 0,
   totalPages: 1,
   page: 1,
   perPage: 7,
@@ -145,7 +148,18 @@ const wordsSlice = createSlice({
           state.userWords.push(action.payload);
         }
       )
-      .addCase(createNewWord.rejected, handleRejected);
+      .addCase(createNewWord.rejected, handleRejected)
+
+      //statistics
+      .addCase(getStatistics.pending, handlePending)
+      .addCase(
+        getStatistics.fulfilled,
+        (state, action: PayloadAction<{ totalCount: number }>) => {
+          state.isLoading = false;
+          state.wordsToStudy = action.payload.totalCount;
+        }
+      )
+      .addCase(getStatistics.rejected, handleRejected);
   },
 });
 

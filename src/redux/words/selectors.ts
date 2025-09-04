@@ -14,3 +14,6 @@ export const selectPage = (state: RootState) => state.words.page;
 export const selectWordsError = (state: RootState) => state.words.error;
 
 export const selectWordsIsLoading = (state: RootState) => state.words.isLoading;
+
+export const selectWordsToStudy = (state: RootState) =>
+  state.words.wordsToStudy;

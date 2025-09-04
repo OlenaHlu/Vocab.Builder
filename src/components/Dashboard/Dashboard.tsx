@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { selectSearchQuery } from "../../redux/filters/selectors";
-import { selectUserWords } from "../../redux/words/selectors";
+import { selectWordsToStudy } from "../../redux/words/selectors";
+import { getStatistics } from "../../redux/words/operations";
 import { setSearchQuery } from "../../redux/filters/slice";
 import { useLocation } from "react-router-dom";
 import Filters from "./Filters/Filters";
@@ -12,7 +13,7 @@ import Icon from "../common/Icon";
 import AddWordModal from "../Modals/AddWordModal/AddWordModal";
 
 const Dashboard = () => {
-  const words = useAppSelector(selectUserWords);
+  const wordsToStudy = useAppSelector(selectWordsToStudy);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
   const showAddWordBtn = location.pathname === "/dictionary";
@@ -21,6 +22,10 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(setSearchQuery(""));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getStatistics());
   }, [dispatch]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +51,7 @@ const Dashboard = () => {
       <Filters />
       <div>
         <p>To study:</p>
-        <span>{words.length}</span>
+        <span>{wordsToStudy}</span>
       </div>
       <div>
         {showAddWordBtn && (

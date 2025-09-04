@@ -125,3 +125,21 @@ export const createNewWord = createAsyncThunk<
     return rejectWithValue("An unexpected error occured.");
   }
 });
+
+export const getStatistics = createAsyncThunk<
+  { totalCount: number },
+  void,
+  { rejectValue: string }
+>("words/getStatistics", async (_, { rejectWithValue }) => {
+  try {
+    const response = await authenticatedAxios.get<{ totalCount: number }>(
+      "words/statistics"
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+    return rejectWithValue("An unexpected error occured.");
+  }
+});
