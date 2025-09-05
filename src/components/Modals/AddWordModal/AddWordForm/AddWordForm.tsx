@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { createNewWord } from "../../../../redux/words/operations";
-import { selectCategories } from "../../../../redux/filters/selectors";
+import { selectCategories } from "../../../../redux/words/selectors";
 import { createWordSchema } from "../../../../utils/validation";
 import { type WordRequest } from "../../../../redux/types";
 import Icon from "../../../common/Icon";

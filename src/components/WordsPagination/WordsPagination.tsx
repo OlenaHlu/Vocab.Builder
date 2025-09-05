@@ -8,10 +8,14 @@ import {
   selectPage,
   selectPerPage,
   selectTotalPages,
+  selectSelectedCategory,
+  selectSearchQuery,
+  selectVerbType,
 } from "../../redux/words/selectors";
 import { setPage } from "../../redux/words/slice";
 import { getAllWords, getUserWords } from "../../redux/words/operations";
 import { useCallback } from "react";
+import { type WordsRequestParams } from "../../redux/types";
 
 type WordsPaginationProps = {
   variant: "all" | "user";
@@ -23,17 +27,31 @@ const WordsPagination = ({ variant }: WordsPaginationProps) => {
   const totalPages = useAppSelector(selectTotalPages) || 1;
   const perPage = useAppSelector(selectPerPage) || 7;
 
+  const selectedCategory = useAppSelector(selectSelectedCategory);
+  const searchQuery = useAppSelector(selectSearchQuery);
+  const verbType = useAppSelector(selectVerbType);
+
   const handleChangePage = useCallback(
     (_: React.ChangeEvent<unknown>, value: number) => {
       dispatch(setPage(value));
 
+      const params: WordsRequestParams = { page: value, limit: perPage };
+
+      if (searchQuery) params.keyword = searchQuery;
+      if (selectedCategory !== "all") params.category = selectedCategory;
+
+      if (selectedCategory === "verb") {
+        if (verbType === "irregular") params.isIrregular = true;
+        if (verbType === "regular") params.isIrregular = false;
+      }
+
       if (variant === "all") {
-        dispatch(getAllWords({ page: value, limit: perPage }));
+        dispatch(getAllWords(params));
       } else {
-        dispatch(getUserWords({ page: value, limit: perPage }));
+        dispatch(getUserWords(params));
       }
     },
-    [dispatch, variant, perPage]
+    [dispatch, variant, perPage, selectedCategory, searchQuery, verbType]
   );
   return (
     <Stack

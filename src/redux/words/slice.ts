@@ -2,6 +2,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import {
   getAllWords,
   getUserWords,
+  getCategories,
   addWordById,
   editWord,
   deleteWord,
@@ -17,6 +18,7 @@ import {
   type EditWordResponse,
   type DeleteWordResponse,
   type CreateNewWordResponse,
+  type Category,
 } from "../types";
 
 export type WordsState = {
@@ -26,6 +28,10 @@ export type WordsState = {
   totalPages: number;
   page: number;
   perPage: number;
+  categories: Category[];
+  selectedCategory: string;
+  searchQuery: string;
+  verbType: string;
   error: null | string;
   isLoading: boolean;
 };
@@ -37,6 +43,10 @@ const initialState: WordsState = {
   totalPages: 1,
   page: 1,
   perPage: 7,
+  categories: [],
+  selectedCategory: "all",
+  searchQuery: "",
+  verbType: "",
   error: null,
   isLoading: false,
 };
@@ -60,6 +70,15 @@ const wordsSlice = createSlice({
   reducers: {
     setPage(state, action: PayloadAction<number>) {
       state.page = action.payload;
+    },
+    setCategory(state, action: PayloadAction<Category>) {
+      state.selectedCategory = action.payload;
+    },
+    setSearchQuery(state, action: PayloadAction<string>) {
+      state.searchQuery = action.payload;
+    },
+    setVerbType(state, action: PayloadAction<string>) {
+      state.verbType = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -91,6 +110,20 @@ const wordsSlice = createSlice({
         }
       )
       .addCase(getUserWords.rejected, handleRejected)
+
+      //categories
+      .addCase(getCategories.pending, handlePending)
+      .addCase(
+        getCategories.fulfilled,
+        (state, action: PayloadAction<Category[]>) => {
+          state.isLoading = false;
+          state.categories = action.payload;
+        }
+      )
+      .addCase(getCategories.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
 
       //add word by id from all words to user
       .addCase(addWordById.pending, handlePending)
@@ -163,5 +196,6 @@ const wordsSlice = createSlice({
   },
 });
 
-export const { setPage } = wordsSlice.actions;
+export const { setPage, setCategory, setSearchQuery, setVerbType } =
+  wordsSlice.actions;
 export const wordsReducer = wordsSlice.reducer;

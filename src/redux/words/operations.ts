@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import authenticatedAxios from "../../api/axiosConfig";
 import {
+  type Category,
   type WordsResponse,
   type WordsRequestParams,
   type UserWordsResponse,
@@ -22,6 +23,7 @@ export const getAllWords = createAsyncThunk<
     const response = await authenticatedAxios.get<WordsResponse>("/words/all", {
       params,
     });
+
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -51,6 +53,24 @@ export const getUserWords = createAsyncThunk<
     return rejectWithValue("An unexpected error occured.");
   }
 });
+
+export const getCategories = createAsyncThunk<Category[], void>(
+  "filters/getCategories",
+  async (_, thunkAPI) => {
+    try {
+      const response = await authenticatedAxios.get<Category[]>(
+        "words/categories"
+      );
+      return response.data;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message ||
+          error.message ||
+          "An unexpected error occurred"
+      );
+    }
+  }
+);
 
 export const addWordById = createAsyncThunk<
   AddNewWordResponse,

@@ -3,10 +3,9 @@ import css from "./Dashboard.module.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import { selectSearchQuery } from "../../redux/filters/selectors";
 import { selectWordsToStudy } from "../../redux/words/selectors";
 import { getStatistics } from "../../redux/words/operations";
-import { setSearchQuery } from "../../redux/filters/slice";
+import { setSearchQuery } from "../../redux/words/slice";
 import { useLocation } from "react-router-dom";
 import Filters from "./Filters/Filters";
 import Icon from "../common/Icon";
@@ -17,8 +16,10 @@ const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
   const showAddWordBtn = location.pathname === "/dictionary";
-  const searchQuery = useAppSelector(selectSearchQuery);
   const dispatch = useAppDispatch();
+
+  const scope: "allWords" | "userWords" =
+    location.pathname === "/dictionary" ? "userWords" : "allWords";
 
   useEffect(() => {
     dispatch(setSearchQuery(""));
@@ -28,27 +29,13 @@ const Dashboard = () => {
     dispatch(getStatistics());
   }, [dispatch]);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setSearchQuery(e.target.value));
-  };
-
   const handleModalSuccess = () => {
     setIsModalOpen(false);
   };
 
   return (
     <section className={css.dashboardContainer}>
-      <div className={css.inputBlock}>
-        <input
-          className={css.input}
-          type="text"
-          value={searchQuery}
-          placeholder="Find the word"
-          onChange={handleSearch}
-        />
-        <Icon iconName="search" className={css.iconSearch} />
-      </div>
-      <Filters />
+      <Filters scope={scope} />
       <div>
         <p>To study:</p>
         <span>{wordsToStudy}</span>

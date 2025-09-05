@@ -1,22 +1,38 @@
 import css from "./Filters.module.css";
 import { useState, useEffect } from "react";
-import { getCategories } from "../../../redux/filters/operation";
+import {
+  getUserWords,
+  getAllWords,
+  getCategories,
+} from "../../../redux/words/operations";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import {
   selectCategories,
   selectSelectedCategory,
   selectVerbType,
-} from "../../../redux/filters/selectors";
-import { setCategory, setVerbType } from "../../../redux/filters/slice";
+  selectSearchQuery,
+} from "../../../redux/words/selectors";
+import {
+  setCategory,
+  setVerbType,
+  setSearchQuery,
+} from "../../../redux/words/slice";
+import { type WordsRequestParams } from "../../../redux/types";
 import Icon from "../../common/Icon";
 
-const Filters = () => {
-  const dispatch = useAppDispatch();
-  const [isOpen, setIsOpen] = useState(false);
-  const categories = useAppSelector(selectCategories);
+type FiltersProps = {
+  scope: "allWords" | "userWords";
+};
 
+const Filters = ({ scope }: FiltersProps) => {
+  const dispatch = useAppDispatch();
+
+  const categories = useAppSelector(selectCategories);
   const selectedCategory = useAppSelector(selectSelectedCategory);
   const verbType = useAppSelector(selectVerbType);
+  const searchQuery = useAppSelector(selectSearchQuery);
+
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -27,10 +43,38 @@ const Filters = () => {
     dispatch(setVerbType(""));
   }, [dispatch]);
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSearchQuery(e.target.value));
+  };
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      const sanitized = searchQuery.trim();
+
+      const params: WordsRequestParams = {};
+      if (sanitized) params.keyword = sanitized;
+      if (selectedCategory !== "all") params.category = selectedCategory;
+
+      if (selectedCategory === "verb") {
+        if (verbType === "irregular") params.isIrregular = true;
+        if (verbType === "regular") params.isIrregular = false;
+      }
+
+      if (scope === "allWords") {
+        dispatch(getAllWords(params));
+      } else {
+        dispatch(getUserWords(params));
+      }
+    }, 300);
+
+    return () => clearTimeout(handler);
+  }, [searchQuery, selectedCategory, verbType, scope, dispatch]);
+
   const handleCategory = (category: string) => {
     dispatch(setCategory(category));
     setIsOpen(false);
   };
+
   const toggleDropDown = () => setIsOpen((prev) => !prev);
 
   const handleVerbType = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +84,16 @@ const Filters = () => {
   return (
     <>
       <form className={css.form}>
+        <div className={css.inputBlock}>
+          <input
+            className={css.input}
+            type="text"
+            value={searchQuery}
+            placeholder="Find the word"
+            onChange={handleSearch}
+          />
+          <Icon iconName="search" className={css.iconSearch} />
+        </div>
         <div className={css.filter}>
           <button
             className={css.categoriesBtn}
