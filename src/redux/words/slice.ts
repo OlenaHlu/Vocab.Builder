@@ -8,6 +8,8 @@ import {
   deleteWord,
   createNewWord,
   getStatistics,
+  getTasks,
+  postAnswer,
 } from "./operations";
 import {
   type WordsResponse,
@@ -19,6 +21,9 @@ import {
   type DeleteWordResponse,
   type CreateNewWordResponse,
   type Category,
+  type WordTasksResponse,
+  type TasksResponse,
+  type AnswersResponse,
 } from "../types";
 
 export type WordsState = {
@@ -32,6 +37,7 @@ export type WordsState = {
   selectedCategory: string;
   searchQuery: string;
   verbType: string;
+  tasks: WordTasksResponse[];
   error: null | string;
   isLoading: boolean;
 };
@@ -47,6 +53,7 @@ const initialState: WordsState = {
   selectedCategory: "all",
   searchQuery: "",
   verbType: "",
+  tasks: [],
   error: null,
   isLoading: false,
 };
@@ -192,7 +199,28 @@ const wordsSlice = createSlice({
           state.wordsToStudy = action.payload.totalCount;
         }
       )
-      .addCase(getStatistics.rejected, handleRejected);
+      .addCase(getStatistics.rejected, handleRejected)
+
+      //tasks
+      .addCase(getTasks.pending, handlePending)
+      .addCase(
+        getTasks.fulfilled,
+        (state, action: PayloadAction<TasksResponse>) => {
+          state.isLoading = false;
+          state.tasks = action.payload.tasks;
+        }
+      )
+
+      //answers
+      .addCase(postAnswer.pending, handlePending)
+      .addCase(
+        postAnswer.fulfilled,
+        (state, action: PayloadAction<AnswersResponse[]>) => {
+          state.isLoading = false;
+          console.log("Answers posted successfully:", action.payload);
+        }
+      )
+      .addCase(postAnswer.rejected, handleRejected);
   },
 });
 

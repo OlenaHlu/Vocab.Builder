@@ -6,7 +6,11 @@ import {
 } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
 import { type UserWord } from "../../../redux/types";
-import { editWord, deleteWord } from "../../../redux/words/operations";
+import {
+  editWord,
+  deleteWord,
+  getUserWords,
+} from "../../../redux/words/operations";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { selectUserWords } from "../../../redux/words/selectors";
 // import ProgressBar from "./ProgressBar/ProgressBar";
@@ -51,6 +55,8 @@ const OwnWordsTable = () => {
     try {
       dispatch(deleteWord({ id: deletingWord._id })).unwrap();
       ShowToast({ message: "Word deleted successfully", type: "success" });
+
+      dispatch(getUserWords({ page: 1, limit: 7 }));
     } catch (error) {
       console.error("Delete failed", error);
     } finally {

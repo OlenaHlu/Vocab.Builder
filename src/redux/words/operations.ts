@@ -11,6 +11,9 @@ import {
   type DeleteWordResponse,
   type CreateNewWordRequest,
   type CreateNewWordResponse,
+  type TasksResponse,
+  type AnswersRequest,
+  type AnswersResponse,
 } from "../types";
 import axios from "axios";
 
@@ -154,6 +157,43 @@ export const getStatistics = createAsyncThunk<
   try {
     const response = await authenticatedAxios.get<{ totalCount: number }>(
       "words/statistics"
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+    return rejectWithValue("An unexpected error occured.");
+  }
+});
+
+export const getTasks = createAsyncThunk<TasksResponse, void>(
+  "words/getTasks",
+  async (_, thunkAPI) => {
+    try {
+      const response = await authenticatedAxios.get<TasksResponse>(
+        "words/tasks"
+      );
+      return response.data;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message ||
+          error.message ||
+          "An unexpected error occurred"
+      );
+    }
+  }
+);
+
+export const postAnswer = createAsyncThunk<
+  AnswersResponse[],
+  AnswersRequest[],
+  { rejectValue: string }
+>("words/postAnswers", async (params, { rejectWithValue }) => {
+  try {
+    const response = await authenticatedAxios.post<AnswersResponse[]>(
+      "words/answers",
+      params
     );
     return response.data;
   } catch (error) {

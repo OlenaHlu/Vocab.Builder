@@ -50,6 +50,13 @@ export type EditWordRequest = WordRequest;
 
 export type CreateNewWordRequest = WordRequest;
 
+export type AnswersRequest = {
+  _id: string;
+  en: string;
+  ua: string;
+  task: "en" | "ua";
+};
+
 //responses type
 
 export type AuthResponse = {
@@ -92,3 +99,21 @@ export type DeleteWordResponse = {
 };
 
 export type CreateNewWordResponse = ActionsWordResponse;
+
+export type TasksResponse = {
+  tasks: WordTasksResponse[];
+};
+
+export type WordTasksResponse = {
+  _id: string;
+  ua: string;
+  task: string;
+};
+
+export type AnswersResponse = {
+  _id: string;
+  en: string;
+  ua: string;
+  task: "en" | "ua";
+  isDone: boolean;
+};
