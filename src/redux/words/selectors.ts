@@ -26,3 +26,5 @@ export const selectVerbType = (state: RootState) => state.words.verbType;
 export const selectWordsError = (state: RootState) => state.words.error;
 
 export const selectWordsIsLoading = (state: RootState) => state.words.isLoading;
+
+export const selectTasks = (state: RootState) => state.words.tasks;

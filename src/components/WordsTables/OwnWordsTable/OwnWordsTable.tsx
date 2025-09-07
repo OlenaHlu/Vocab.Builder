@@ -1,3 +1,5 @@
+import css from "./OwnWordsTable.module.css";
+
 import {
   createColumnHelper,
   flexRender,
@@ -94,13 +96,13 @@ const OwnWordsTable = () => {
   });
 
   return (
-    <div>
-      <table>
-        <thead>
+    <div className={css.tableContainer}>
+      <table className={css.table}>
+        <thead className={css.tableHeader}>
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
+            <tr className={css.headerRow} key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>
+                <th className={css.headerColumn} key={header.id}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
