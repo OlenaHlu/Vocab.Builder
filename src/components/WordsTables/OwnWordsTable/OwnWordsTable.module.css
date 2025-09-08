@@ -6,6 +6,16 @@
   margin-right: auto;
 }
 
+.withIcon {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.icon {
+  display: none;
+}
+
 .table {
   width: 343px;
   border-radius: 8px;
@@ -62,6 +72,11 @@
     font-size: 18px;
     text-align: left;
   }
+  .icon {
+    display: block;
+    width: 28px;
+    height: 28px;
+  }
 
   .headerRow th:first-child {
     border-top-left-radius: 15px;
@@ -95,7 +110,7 @@
   }
 
   .table {
-    width: 1204px;
+    width: 1240px;
   }
 
   .headerRow th {

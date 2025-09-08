@@ -36,33 +36,38 @@ const Dashboard = () => {
   return (
     <section className={css.dashboardContainer}>
       <Filters scope={scope} />
-      <div>
-        <p>To study:</p>
-        <span>{wordsToStudy}</span>
-      </div>
-      <div>
-        {showAddWordBtn && (
-          <>
-            <div>
-              <p>Add word</p>
-              <button onClick={() => setIsModalOpen(true)}>
-                <Icon className={css.iconPlus} iconName="plus" />
-              </button>
-            </div>
-            {isModalOpen && (
-              <AddWordModal
-                onClose={() => setIsModalOpen(false)}
-                onCreate={handleModalSuccess}
-              />
-            )}
-          </>
-        )}
+      <div className={css.allAction}>
+        <div className={css.toStudy}>
+          <p className={css.textStady}>To study:</p>
+          <span className={css.quantity}>{wordsToStudy}</span>
+        </div>
+        <div className={css.actionContainer}>
+          {showAddWordBtn && (
+            <>
+              <div className={css.addWord}>
+                <p className={css.textAdd}>Add word</p>
+                <button
+                  className={css.addBtn}
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  <Icon className={css.iconPlus} iconName="plus" />
+                </button>
+              </div>
+              {isModalOpen && (
+                <AddWordModal
+                  onClose={() => setIsModalOpen(false)}
+                  onCreate={handleModalSuccess}
+                />
+              )}
+            </>
+          )}
 
-        <div>
-          <p>Train oneself</p>
-          <Link to="/training">
-            <Icon className={css.iconArrow} iconName="arrow" />
-          </Link>
+          <div className={css.train}>
+            <p className={css.textTrain}>Train oneself</p>
+            <Link to="/training">
+              <Icon className={css.iconArrow} iconName="arrow" />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

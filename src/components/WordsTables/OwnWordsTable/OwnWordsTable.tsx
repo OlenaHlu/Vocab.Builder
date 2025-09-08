@@ -20,6 +20,7 @@ import ActionsMenu from "./ActionsMenu/ActionsMenu";
 import EditWordModal from "../../Modals/EditWordModal/EditWordModal";
 import DeleteWordModal from "../../Modals/DeleteWordModal/DeleteWordModal";
 import ShowToast from "../../common/ShowToast";
+import Icon from "../../common/Icon";
 
 const columnHelper = createColumnHelper<UserWord>();
 
@@ -68,8 +69,22 @@ const OwnWordsTable = () => {
 
   const columns = useMemo(
     () => [
-      columnHelper.accessor("en", { header: "Word" }),
-      columnHelper.accessor("ua", { header: "Translation" }),
+      columnHelper.accessor("en", {
+        header: () => (
+          <div className={css.withIcon}>
+            <p>Word</p>
+            <Icon iconName="uk" className={css.icon} />
+          </div>
+        ),
+      }),
+      columnHelper.accessor("ua", {
+        header: () => (
+          <div className={css.withIcon}>
+            <p>Translation</p>
+            <Icon iconName="ua" className={css.icon} />
+          </div>
+        ),
+      }),
       columnHelper.accessor("progress", {
         header: "Progress",
         //   cell: ({ getValue }) => <ProgressBar value={getValue()} />,

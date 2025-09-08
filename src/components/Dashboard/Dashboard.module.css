@@ -1,18 +1,97 @@
 .dashboardContainer {
-  width: 375px;
-  padding: 32px 16px 48px 16px;
+  width: 343px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 32px;
   margin-left: auto;
   margin-right: auto;
 }
 
+.toStudy {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.textStady {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(18, 20, 23, 0.5);
+}
+
+.quantity {
+  font-size: 20px;
+}
+
+.actionContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  margin-top: 8px;
+  margin-bottom: 32px;
+}
+
+.addWord,
+.train {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconPlus {
+  width: 20px;
+  height: 20px;
+}
+
 .iconArrow {
+  display: flex;
   fill: none;
   stroke: var(--green);
   width: 18px;
   height: 18px;
 }
 
-.iconPlus {
-  width: 20px;
-  height: 20px;
+/*=================Tablet=================*/
+@media screen and (min-width: 768px) {
+  .dashboardContainer {
+    width: 704px;
+    padding-top: 80px;
+  }
+
+  .toStudy {
+    margin-top: 28px;
+  }
+}
+
+/*=================Desktop=================*/
+@media screen and (min-width: 1440px) {
+  .dashboardContainer {
+    width: 1240px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  .allAction {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .toStudy {
+    margin-top: 0px;
+  }
+
+  .actionContainer {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
 }
