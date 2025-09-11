@@ -1,6 +1,153 @@
+.tableContainer {
+  width: 343px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.withIcon {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.iconFlag {
+  display: none;
+}
+
+.table {
+  width: 343px;
+  border-radius: 8px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  background-color: var(--white);
+}
+
+.tableHeader {
+  background-color: rgba(133, 170, 159, 0.1);
+}
+
+.headerRow th {
+  text-align: center;
+  padding: 16px;
+  border-bottom: 1px solid #dbdbdb;
+  border-right: 1px solid #dbdbdb;
+  font-weight: 500;
+}
+
+.table td {
+  padding: 16px;
+  border-bottom: 1px solid #dbdbdb;
+  border-right: 1px solid #dbdbdb;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.headerRow th:last-child,
+.table td:last-child {
+  border-right: none;
+}
+
+.addText {
+  display: none;
+}
+
 .icon {
   fill: none;
   stroke: var(--green);
   width: 18px;
   height: 18px;
+}
+
+/*=================Tablet=================*/
+@media screen and (min-width: 768px) {
+  .tableContainer {
+    width: 704px;
+    border-radius: 15px;
+  }
+
+  .table {
+    width: 704px;
+    border-radius: 8px;
+    padding: 18px;
+    border-radius: 15px;
+  }
+
+  .iconFlag {
+    display: flex;
+    width: 28px;
+    height: 28px;
+  }
+
+  .headerRow th {
+    font-size: 18px;
+    text-align: left;
+    padding: 22px;
+  }
+
+  .headerRow th:first-child {
+    border-top-left-radius: 15px;
+  }
+
+  .headerRow th:last-child {
+    border-top-right-radius: 15px;
+  }
+
+  .table td {
+    font-size: 18px;
+    padding: 22px;
+  }
+
+  .table tr:last-child td {
+    border-bottom: 1px solid #dbdbdb;
+  }
+
+  .table tr:last-child td:first-child {
+    border-bottom-left-radius: 15px;
+  }
+
+  .table tr:last-child td:last-child {
+    border-bottom-right-radius: 15px;
+  }
+
+  .addContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .addText {
+    display: flex;
+  }
+
+  .icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/*=================Desktop=================*/
+@media screen and (min-width: 1440px) {
+  .tableContainer {
+    width: 1240px;
+  }
+
+  .table {
+    width: 1240px;
+  }
+
+  .headerRow th {
+    font-size: 20px;
+  }
+
+  .table td {
+    font-size: 20px;
+  }
 }

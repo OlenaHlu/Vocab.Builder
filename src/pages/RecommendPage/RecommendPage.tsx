@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useEffect } from "react";
 import { selectWords, selectWordsIsLoading } from "../../redux/words/selectors";
 import { getAllWords } from "../../redux/words/operations";
+import Loader from "../../components/Loader/Loader";
 
 const RecommendPage = () => {
   const dispatch = useAppDispatch();
@@ -23,7 +24,7 @@ const RecommendPage = () => {
       <Header />
       <main>
         <Dashboard />
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <Loader />}
         {!isLoading && !hasWords && <p>You have no own words yet</p>}
         {!isLoading && hasWords && <AllWordTablle allWords={allWords} />}
         <WordsPagination variant="all" />

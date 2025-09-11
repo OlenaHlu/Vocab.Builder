@@ -10,8 +10,8 @@ import { useMemo } from "react";
 import { useAppDispatch } from "../../../redux/hooks";
 import { type Word } from "../../../redux/types";
 import { addWordById } from "../../../redux/words/operations";
-import Icon from "../../common/Icon";
 import ShowToast from "../../common/ShowToast";
+import Icon from "../../common/Icon";
 
 type AllWordTableProps = {
   allWords: Word[];
@@ -34,19 +34,36 @@ const AllWordTable = ({ allWords }: AllWordTableProps) => {
   };
   const columns = useMemo(
     () => [
-      columnHelper.accessor("en", { header: "Word" }),
-      columnHelper.accessor("ua", { header: "Translation" }),
+      columnHelper.accessor("en", {
+        header: () => (
+          <div className={css.withIcon}>
+            <p>Word</p>
+            <Icon iconName="uk" className={css.iconFlag} />
+          </div>
+        ),
+      }),
+      columnHelper.accessor("ua", {
+        header: () => (
+          <div className={css.withIcon}>
+            <p>Translation</p>
+            <Icon iconName="ua" className={css.iconFlag} />
+          </div>
+        ),
+      }),
       columnHelper.accessor("category", { header: "Category" }),
       columnHelper.display({
         id: "actions",
         header: "",
         cell: ({ row }) => (
-          <button
-            onClick={() => handleAddWord(row.original._id)}
-            className={css.errowBtn}
-          >
-            <Icon iconName="arrow" className={css.icon} />
-          </button>
+          <div className={css.addContainer}>
+            <p className={css.addText}>Add to dictionary</p>
+            <button
+              onClick={() => handleAddWord(row.original._id)}
+              className={css.errowBtn}
+            >
+              <Icon iconName="arrow" className={css.icon} />
+            </button>
+          </div>
         ),
       }),
     ],
@@ -60,13 +77,13 @@ const AllWordTable = ({ allWords }: AllWordTableProps) => {
   });
 
   return (
-    <div>
-      <table>
-        <thead>
+    <div className={css.tableContainer}>
+      <table className={css.table}>
+        <thead className={css.tableHeader}>
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
+            <tr className={css.headerRow} key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>
+                <th className={css.headerColumn} key={header.id}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
