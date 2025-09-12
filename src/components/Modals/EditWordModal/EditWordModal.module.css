@@ -1,0 +1,115 @@
+.editContainer {
+  position: relative;
+  width: 342px;
+  height: 359px;
+  padding: 48px 16px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.iconClose {
+  width: 24px;
+  height: 24px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.formLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.language {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconFlag {
+  width: 28px;
+  height: 28px;
+}
+
+.flagText {
+  font-size: 14px;
+  color: var(--white);
+}
+
+.input {
+  border: 1px solid #d1d5db;
+  border-radius: 15px;
+  padding: 12px 24px;
+  width: 311px;
+  height: 48px;
+  background-color: transparent;
+
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--white);
+}
+
+.input:focus {
+  outline: none;
+}
+
+.actionsBtns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.saveBtn {
+  border-radius: 30px;
+  padding: 12px 60px;
+  width: 158px;
+  height: 48px;
+  background-color: var(--white);
+
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--black);
+  transition: transform 0.3s ease-in-out;
+}
+
+.cancelBtn {
+  border: 1px solid rgba(252, 252, 252, 0.4);
+  border-radius: 30px;
+  padding: 12px 45px;
+  width: 145px;
+  height: 48px;
+
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--white);
+  transition: transform 0.3s ease-in-out;
+}
+
+.saveBtn:hover,
+.cancelBtn:hover {
+  transform: scale(1.05);
+}
+
+/*=================Tablet=================*/
+@media screen and (min-width: 768px) {
+}
+
+/*=================Desktop=================*/
+@media screen and (min-width: 1440px) {
+}

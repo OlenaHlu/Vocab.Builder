@@ -15,8 +15,8 @@ type EditWordModalProps = {
 const EditWordModal = ({ word, onClose, onSave }: EditWordModalProps) => {
   return (
     <ModalWrapper onClose={onClose}>
-      <div>
-        <button onClick={onClose}>
+      <div className={css.editContainer}>
+        <button className={css.closeBtn} onClick={onClose}>
           <Icon iconName="close" className={css.iconClose} />
         </button>
 
@@ -39,17 +39,33 @@ const EditWordModal = ({ word, onClose, onSave }: EditWordModalProps) => {
         >
           {() => (
             <Form>
-              <label>
-                <Icon iconName="ua" className={css.iconFlag} /> Ukrainian
-                <Field name="ua" />
-                <ErrorMessage name="ua" component="div" className={css.error} />
-              </label>
-              <label>
-                <Icon iconName="uk" className={css.iconFlag} /> English
-                <Field name="en" />
-                <ErrorMessage name="en" component="div" className={css.error} />
-              </label>
-              <div>
+              <div className={css.formContainer}>
+                <label className={css.formLabel}>
+                  <div className={css.language}>
+                    <Icon iconName="ua" className={css.iconFlag} />
+                    <p className={css.flagText}>Ukrainian</p>
+                  </div>
+                  <Field className={css.input} name="ua" />
+                  <ErrorMessage
+                    name="ua"
+                    component="div"
+                    className={css.error}
+                  />
+                </label>
+                <label className={css.formLabel}>
+                  <div className={css.language}>
+                    <Icon iconName="uk" className={css.iconFlag} />
+                    <p className={css.flagText}>English</p>
+                  </div>
+                  <Field className={css.input} name="en" />
+                  <ErrorMessage
+                    name="en"
+                    component="div"
+                    className={css.error}
+                  />
+                </label>
+              </div>
+              <div className={css.actionsBtns}>
                 <button type="submit" className={css.saveBtn}>
                   Save
                 </button>
