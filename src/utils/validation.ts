@@ -29,10 +29,18 @@ export const loginSchema = Yup.object().shape({
 });
 
 export const editWordSchema = Yup.object().shape({
+  ua: Yup.string()
+    .required("Translation is required")
+    .matches(
+      /^(?![A-Za-z])[А-ЯІЄЇҐґа-яієїʼ\s]+$/,
+      "Only Ukrainian letters and spaces are allowed"
+    ),
+  category: Yup.string().nullable().notRequired(),
+  isIrregular: Yup.boolean().nullable().notRequired(),
   en: Yup.string()
     .required("English word is required")
     .matches(
-      /\b[A-Za-z'-]+(?:\s+[A-Za-z'-]+)*\b/,
+      /^[A-Za-z'-]+(?:\s+[A-Za-z'-]+)*$/,
       "Only English letters, spaces, ' and - are allowed"
     )
     .when("isIrregular", {
@@ -43,14 +51,6 @@ export const editWordSchema = Yup.object().shape({
           "Use the format: base form - past simple - past participle (e.g., go-went-gone)"
         ),
     }),
-  ua: Yup.string()
-    .required("Translation is required")
-    .matches(
-      /^(?![A-Za-z])[А-ЯІЄЇҐґа-яієїʼ\s]+$/,
-      "Only Ukrainian letters and spaces are allowed"
-    ),
-  category: Yup.string().nullable().notRequired(),
-  isIrregular: Yup.boolean().nullable().notRequired(),
 });
 
 export const createWordSchema = Yup.object().shape({

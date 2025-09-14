@@ -45,24 +45,28 @@ const EditWordModal = ({ word, onClose, onSave }: EditWordModalProps) => {
                     <Icon iconName="ua" className={css.iconFlag} />
                     <p className={css.flagText}>Ukrainian</p>
                   </div>
-                  <Field className={css.input} name="ua" />
-                  <ErrorMessage
-                    name="ua"
-                    component="div"
-                    className={css.error}
-                  />
+                  <div className={css.inputBlock}>
+                    <Field className={css.input} name="ua" />
+                    <ErrorMessage
+                      name="ua"
+                      component="div"
+                      className={css.error}
+                    />
+                  </div>
                 </label>
                 <label className={css.formLabel}>
                   <div className={css.language}>
                     <Icon iconName="uk" className={css.iconFlag} />
                     <p className={css.flagText}>English</p>
                   </div>
-                  <Field className={css.input} name="en" />
-                  <ErrorMessage
-                    name="en"
-                    component="div"
-                    className={css.error}
-                  />
+                  <div className={css.inputBlock}>
+                    <Field className={css.input} name="en" />
+                    <ErrorMessage
+                      name="en"
+                      component="div"
+                      className={css.error}
+                    />
+                  </div>
                 </label>
               </div>
               <div className={css.actionsBtns}>

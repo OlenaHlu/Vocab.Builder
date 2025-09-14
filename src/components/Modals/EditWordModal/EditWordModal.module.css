@@ -1,19 +1,27 @@
 .editContainer {
   position: relative;
   width: 342px;
-  height: 359px;
   padding: 48px 16px;
+}
+
+.formContainer {
+  width: 311px;
 }
 
 .closeBtn {
   position: absolute;
   top: 16px;
   right: 16px;
+  transition: transform 0.3s ease-in-out;
 }
 
 .iconClose {
   width: 24px;
   height: 24px;
+}
+
+.closeBtn:hover {
+  transform: scale(1.06);
 }
 
 .formContainer {
@@ -46,8 +54,14 @@
   color: var(--white);
 }
 
+.inputBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .input {
-  border: 1px solid #d1d5db;
+  border: 1px solid rgba(252, 252, 252, 0.3);
   border-radius: 15px;
   padding: 12px 24px;
   width: 311px;
@@ -59,13 +73,26 @@
   font-size: 16px;
   line-height: 1.5;
   color: var(--white);
+  transition: border 0.3s ease-in-out;
 }
 
 .input:focus {
   outline: none;
+  border: 1px solid var(--white);
+}
+
+.error {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.0075rem;
+  color: #d80027;
+  text-align: center;
 }
 
 .actionsBtns {
+  width: 311px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -108,6 +135,59 @@
 
 /*=================Tablet=================*/
 @media screen and (min-width: 768px) {
+  .editContainer {
+    width: 627px;
+    padding: 64px;
+  }
+  .formContainer {
+    width: 500px;
+  }
+
+  .formLabel {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 32px;
+  }
+
+  .language {
+    width: 114px;
+  }
+
+  .iconFlag {
+    width: 32px;
+    height: 32px;
+  }
+
+  .flagText {
+    font-size: 16px;
+  }
+
+  .input {
+    border: 1px solid rgba(252, 252, 252, 0.3);
+    padding: 16px 18px;
+    width: 354px;
+    height: 56px;
+  }
+
+  .actionsBtns {
+    width: 500px;
+  }
+
+  .saveBtn {
+    padding: 14px 101px;
+    width: 245px;
+    height: 56px;
+
+    font-size: 18px;
+  }
+
+  .cancelBtn {
+    padding: 14px 92px;
+    width: 245px;
+    height: 56px;
+    font-size: 18px;
+  }
 }
 
 /*=================Desktop=================*/
