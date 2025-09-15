@@ -70,7 +70,7 @@ const AddWordForm = ({ onCancel, onSuccess }: AddWordFormProps) => {
         };
         return (
           <Form>
-            <div>
+            <div className={css.categoriesContainer}>
               <button
                 className={css.categoriesBtn}
                 type="button"
@@ -115,11 +115,14 @@ const AddWordForm = ({ onCancel, onSuccess }: AddWordFormProps) => {
                     onChange={() => handleVerbType("regular")}
                   />
                   {verbType === "regular" ? (
-                    <Icon className={css.radioIcon} iconName="radio-btn-full" />
+                    <Icon
+                      className={css.radioIcon}
+                      iconName="radio-btn-full-md"
+                    />
                   ) : (
                     <Icon
                       className={`${css.radioIcon} ${css.off}`}
-                      iconName="radio-btn"
+                      iconName="radio-btn-md"
                     />
                   )}
                   Regular
@@ -133,11 +136,14 @@ const AddWordForm = ({ onCancel, onSuccess }: AddWordFormProps) => {
                     onChange={() => handleVerbType("irregular")}
                   />
                   {verbType === "irregular" ? (
-                    <Icon className={css.radioIcon} iconName="radio-btn-full" />
+                    <Icon
+                      className={css.radioIcon}
+                      iconName="radio-btn-full-md"
+                    />
                   ) : (
                     <Icon
                       className={`${css.radioIcon} ${css.off}`}
-                      iconName="radio-btn"
+                      iconName="radio-btn-md"
                     />
                   )}
                   Irregular

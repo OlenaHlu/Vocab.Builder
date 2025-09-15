@@ -1,0 +1,110 @@
+/* .categoriesContainer {
+  margin-bottom: ;
+} */
+
+.categoriesBtn {
+  border: 1px solid #d1d5db;
+  border-radius: 15px;
+  padding: 12px 24px;
+  width: 311px;
+  height: 48px;
+
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--white);
+  text-transform: capitalize;
+}
+
+.categoriesBtn:focus {
+  border: 1px solid var(--white);
+}
+
+.iconUp,
+.iconDown {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  right: 24px;
+  top: 18px;
+  transition: transform 0.3s ease;
+}
+
+.iconUp {
+  transform: rotate(0.5turn);
+}
+
+.categoriesList {
+  position: absolute;
+  border-radius: 15px;
+  padding: 12px 107px 12px 24px;
+  width: 311px;
+  height: 240px;
+  box-shadow: 0 4px 47px 0 rgba(18, 20, 23, 0.08);
+  background-color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #465455;
+  text-transform: capitalize;
+
+  overflow-y: auto;
+}
+
+.categoryItem {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.categoryItem:hover,
+.categoryItem:active {
+  color: var(--green);
+}
+
+.verbsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.inputRadio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.labelRadio {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  text-align: center;
+  color: var(--black);
+}
+
+.radioIcon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+
+.off {
+  fill: none;
+  stroke: rgba(18, 20, 23, 0.2);
+}

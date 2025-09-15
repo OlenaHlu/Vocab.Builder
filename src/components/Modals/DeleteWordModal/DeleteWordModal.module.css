@@ -1,0 +1,74 @@
+.modalContent {
+  width: 342px;
+  padding: 32px 20px;
+}
+
+.text {
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 18px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.deleteBtn {
+  border-radius: 30px;
+  padding: 12px 30px;
+  width: 145px;
+  height: 48px;
+  background-color: var(--white);
+
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--black);
+  transition: transform 0.3s ease-in-out;
+}
+
+.cancelBtn {
+  border: 1px solid rgba(252, 252, 252, 0.4);
+  border-radius: 30px;
+  padding: 12px 30px;
+  width: 145px;
+  height: 48px;
+
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--white);
+  transition: transform 0.3s ease-in-out;
+}
+
+.deleteBtn:hover,
+.cancelBtn:hover {
+  transform: scale(1.05);
+}
+
+/*=================Tablet=================*/
+@media screen and (min-width: 768px) {
+  .modalContent {
+    width: 527px;
+    padding: 32px;
+  }
+
+  .text {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 32px;
+  }
+
+  .deleteBtn,
+  .cancelBtn {
+    width: 220px;
+  }
+}
+
+/*=================Desktop=================*/
+@media screen and (min-width: 1440px) {
+}
