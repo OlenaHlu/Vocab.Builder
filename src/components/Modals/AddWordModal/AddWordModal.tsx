@@ -13,15 +13,17 @@ type AddWordModalProps = {
 const AddWordModal = ({ onClose, onCreate }: AddWordModalProps) => {
   return (
     <ModalWrapper onClose={onClose}>
-      <div>
-        <button onClick={onClose}>
+      <div className={css.addWordModal}>
+        <button className={css.closeBtn} onClick={onClose}>
           <Icon iconName="close" className={css.iconClose} />
         </button>
-        <h2>Add word</h2>
-        <p>
-          Adding a new word to the dictionary is an important step in enriching
-          the language base and expanding the vocabulary.
-        </p>
+        <div className={css.modalInfo}>
+          <h2 className={css.modalTitle}>Add word</h2>
+          <p className={css.modalText}>
+            Adding a new word to the dictionary is an important step in
+            enriching the language base and expanding the vocabulary.
+          </p>
+        </div>
         <AddWordForm onCancel={onClose} onSuccess={onCreate} />
       </div>
     </ModalWrapper>

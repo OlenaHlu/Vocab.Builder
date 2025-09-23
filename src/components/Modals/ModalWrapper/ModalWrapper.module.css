@@ -33,3 +33,10 @@
   transform: translateY(0);
   opacity: 1;
 }
+
+/*=================Tablet=================*/
+@media screen and (min-width: 768px) {
+  .content {
+    border-radius: 30px;
+  }
+}

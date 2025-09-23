@@ -1,0 +1,79 @@
+.addWordModal {
+  padding: 48px 16px;
+  width: 342px;
+  height: 625px;
+  position: relative;
+}
+
+.closeBtn {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+.iconClose {
+  width: 24px;
+  height: 24px;
+}
+
+.modalInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.modalTitle {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.17;
+  letter-spacing: -0.03rem;
+  color: var(--white);
+}
+
+.modalText {
+  text-align: left;
+  font-weight: 400;
+  color: rgba(252, 252, 252, 0.8);
+}
+
+/*=================Tablet=================*/
+@media screen and (min-width: 768px) {
+  .addWordModal {
+    padding: 48px 64px;
+    border-radius: 30px;
+    width: 627px;
+    height: 621px;
+  }
+
+  .closeBtn {
+    right: 20px;
+    top: 20px;
+  }
+
+  .iconClose {
+    width: 32px;
+    height: 32px;
+  }
+
+  .modalInfo {
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .modalTitle {
+    font-size: 40px;
+    line-height: 1.2;
+    letter-spacing: -0.05rem;
+  }
+
+  .modalText {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+}
+
+/*=================Desktop=================*/
+@media screen and (min-width: 1440px) {
+}
