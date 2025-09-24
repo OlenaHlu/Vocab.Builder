@@ -1,7 +1,6 @@
 .addWordModal {
   padding: 48px 16px;
   width: 342px;
-  height: 625px;
   position: relative;
 }
 
@@ -9,11 +8,16 @@
   position: absolute;
   right: 16px;
   top: 16px;
+  transition: transform 0.3s ease-in-out;
 }
 
 .iconClose {
   width: 24px;
   height: 24px;
+}
+
+.closeBtn:hover {
+  transform: scale(1.06);
 }
 
 .modalInfo {
@@ -44,7 +48,6 @@
     padding: 48px 64px;
     border-radius: 30px;
     width: 627px;
-    height: 621px;
   }
 
   .closeBtn {

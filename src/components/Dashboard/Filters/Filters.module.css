@@ -168,8 +168,12 @@
   }
 
   .categoriesBtn {
-    width: 164px;
+    width: 254px;
     height: 48px;
+  }
+
+  .categoriesList {
+    width: 254px;
   }
 }
 

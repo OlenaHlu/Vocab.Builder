@@ -139,6 +139,17 @@
     width: 627px;
     padding: 64px;
   }
+
+  .closeBtn {
+    top: 20px;
+    right: 20px;
+  }
+
+  .iconClose {
+    width: 32px;
+    height: 32px;
+  }
+
   .formContainer {
     width: 500px;
   }

@@ -58,11 +58,19 @@
   display: none;
 }
 
+.errowBtn {
+  transition: transform 0.3s ease-in-out;
+}
+
 .icon {
   fill: none;
   stroke: var(--green);
   width: 18px;
   height: 18px;
+}
+
+.errowBtn:hover {
+  transform: scale(1.2);
 }
 
 /*=================Tablet=================*/

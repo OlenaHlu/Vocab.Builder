@@ -1,9 +1,16 @@
-/* .categoriesContainer {
-  margin-bottom: ;
-} */
+.catWithVerb {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.categoriesContainer {
+  position: relative;
+}
 
 .categoriesBtn {
-  border: 1px solid #d1d5db;
+  border: 1px solid rgba(252, 252, 252, 0.3);
   border-radius: 15px;
   padding: 12px 24px;
   width: 311px;
@@ -41,6 +48,7 @@
 
 .categoriesList {
   position: absolute;
+  top: 50px;
   border-radius: 15px;
   padding: 12px 107px 12px 24px;
   width: 311px;
@@ -56,8 +64,9 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
-  color: #465455;
+  color: rgba(18, 20, 23, 0.5);
   text-transform: capitalize;
+  z-index: 1000;
 
   overflow-y: auto;
 }
@@ -73,9 +82,10 @@
 }
 
 .verbsContainer {
+  width: 160px;
   display: flex;
   flex-direction: row;
-  gap: 16px;
+  justify-content: space-between;
 }
 
 .inputRadio {
@@ -95,7 +105,7 @@
   font-weight: 400;
   font-size: 12px;
   text-align: center;
-  color: var(--black);
+  color: var(--white);
 }
 
 .radioIcon {
@@ -107,4 +117,177 @@
 .off {
   fill: none;
   stroke: rgba(18, 20, 23, 0.2);
+}
+
+.formsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.formLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.langText {
+  font-size: 14px;
+  color: var(--white);
+}
+
+.iconFlag {
+  width: 28px;
+  height: 28px;
+}
+
+.input {
+  border: 1px solid rgba(252, 252, 252, 0.3);
+  border-radius: 15px;
+  padding: 12px 24px;
+  width: 311px;
+  height: 48px;
+  background-color: transparent;
+
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--white);
+  transition: border 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid var(--white);
+}
+
+.error {
+  color: rgb(135, 52, 49);
+}
+
+.actionBtns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 8px;
+}
+
+.saveBtn {
+  border-radius: 30px;
+  padding: 12px 63px;
+  width: 159px;
+  height: 48px;
+  background: var(--white);
+
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--black);
+  transition: transform 0.3s ease-in-out;
+}
+
+.cancelBtn {
+  border: 1px solid rgba(252, 252, 252, 0.4);
+  border-radius: 30px;
+  padding: 12px 45px;
+  width: 145px;
+  height: 48px;
+
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--white);
+  transition: transform 0.3s ease-in-out;
+}
+
+.saveBtn:hover,
+.cancelBtn:hover {
+  transform: scale(1.05);
+}
+
+/*=================Tablet=================*/
+@media screen and (min-width: 768px) {
+  .categoriesBtn {
+    width: 204px;
+  }
+
+  .categoriesList {
+    width: 204px;
+  }
+
+  .verbsContainer {
+    width: 200px;
+  }
+
+  .labelRadio {
+    font-size: 16px;
+  }
+
+  .formsContainer {
+    gap: 18px;
+  }
+
+  .formLabel {
+    flex-direction: row-reverse;
+    gap: 32px;
+  }
+
+  .langText {
+    font-size: 16px;
+  }
+
+  .inputInfo {
+    width: 114px;
+  }
+
+  .iconFlag {
+    width: 32px;
+    height: 32px;
+  }
+
+  .input {
+    padding: 16px 18px;
+    width: 354px;
+    height: 56px;
+  }
+
+  .actionBtns {
+    gap: 10px;
+  }
+
+  .saveBtn {
+    padding: 14px 104px;
+    width: 245px;
+    height: 56px;
+
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.56;
+  }
+
+  .cancelBtn {
+    padding: 14px 92px;
+    width: 245px;
+    height: 56px;
+
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.56;
+    color: var(--white);
+  }
+}
+
+/*=================Desktop=================*/
+@media screen and (min-width: 1440px) {
 }

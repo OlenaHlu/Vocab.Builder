@@ -70,99 +70,119 @@ const AddWordForm = ({ onCancel, onSuccess }: AddWordFormProps) => {
         };
         return (
           <Form>
-            <div className={css.categoriesContainer}>
-              <button
-                className={css.categoriesBtn}
-                type="button"
-                onClick={toggleDropDown}
-              >
-                {selectedCategory === "all" ? "Categories" : selectedCategory}
+            <div className={css.catWithVerb}>
+              <div className={css.categoriesContainer}>
+                <button
+                  className={css.categoriesBtn}
+                  type="button"
+                  onClick={toggleDropDown}
+                >
+                  {selectedCategory === "all" ? "Categories" : selectedCategory}
 
-                <span>
-                  {isOpen ? (
-                    <Icon iconName="down" className={css.iconUp} />
-                  ) : (
-                    <Icon iconName="down" className={css.iconDown} />
-                  )}
-                </span>
-              </button>
-              {isOpen && (
-                <ul className={css.categoriesList}>
-                  {categories.map((category) => (
-                    <li
-                      className={`${css.categoryItem} ${
-                        selectedCategory === category ? css.active : ""
-                      }`}
-                      key={category}
-                      onClick={() => {
-                        handleCategory(category);
-                      }}
-                    >
-                      {category}
-                    </li>
-                  ))}
-                </ul>
+                  <span>
+                    {isOpen ? (
+                      <Icon iconName="down-md" className={css.iconUp} />
+                    ) : (
+                      <Icon iconName="down-md" className={css.iconDown} />
+                    )}
+                  </span>
+                </button>
+                {isOpen && (
+                  <ul className={css.categoriesList}>
+                    {categories.map((category) => (
+                      <li
+                        className={`${css.categoryItem} ${
+                          selectedCategory === category ? css.active : ""
+                        }`}
+                        key={category}
+                        onClick={() => {
+                          handleCategory(category);
+                        }}
+                      >
+                        {category}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              {selectedCategory === "verb" && (
+                <div className={css.verbsContainer}>
+                  <label className={css.labelRadio}>
+                    <input
+                      className={css.inputRadio}
+                      type="radio"
+                      value="regular"
+                      checked={verbType === "regular"}
+                      onChange={() => handleVerbType("regular")}
+                    />
+                    {verbType === "regular" ? (
+                      <Icon
+                        className={css.radioIcon}
+                        iconName="radio-btn-full-md"
+                      />
+                    ) : (
+                      <Icon
+                        className={`${css.radioIcon} ${css.off}`}
+                        iconName="radio-btn-md"
+                      />
+                    )}
+                    Regular
+                  </label>
+                  <label className={css.labelRadio}>
+                    <input
+                      className={css.inputRadio}
+                      type="radio"
+                      value="irregular"
+                      checked={verbType === "irregular"}
+                      onChange={() => handleVerbType("irregular")}
+                    />
+                    {verbType === "irregular" ? (
+                      <Icon
+                        className={css.radioIcon}
+                        iconName="radio-btn-full-md"
+                      />
+                    ) : (
+                      <Icon
+                        className={`${css.radioIcon} ${css.off}`}
+                        iconName="radio-btn-md"
+                      />
+                    )}
+                    Irregular
+                  </label>
+                </div>
               )}
             </div>
-            {selectedCategory === "verb" && (
-              <div className={css.verbsContainer}>
-                <label className={css.labelRadio}>
-                  <input
-                    className={css.inputRadio}
-                    type="radio"
-                    value="regular"
-                    checked={verbType === "regular"}
-                    onChange={() => handleVerbType("regular")}
+            <div className={css.formsContainer}>
+              <label className={css.formLabel}>
+                <div className={css.inputInfo}>
+                  <Icon iconName="ua" className={css.iconFlag} />
+                  <p className={css.langText}>Ukrainian</p>
+                </div>
+                <div>
+                  <Field name="ua" type="text" className={css.input} />
+                  <ErrorMessage
+                    name="ua"
+                    component="div"
+                    className={css.error}
                   />
-                  {verbType === "regular" ? (
-                    <Icon
-                      className={css.radioIcon}
-                      iconName="radio-btn-full-md"
-                    />
-                  ) : (
-                    <Icon
-                      className={`${css.radioIcon} ${css.off}`}
-                      iconName="radio-btn-md"
-                    />
-                  )}
-                  Regular
-                </label>
-                <label className={css.labelRadio}>
-                  <input
-                    className={css.inputRadio}
-                    type="radio"
-                    value="irregular"
-                    checked={verbType === "irregular"}
-                    onChange={() => handleVerbType("irregular")}
-                  />
-                  {verbType === "irregular" ? (
-                    <Icon
-                      className={css.radioIcon}
-                      iconName="radio-btn-full-md"
-                    />
-                  ) : (
-                    <Icon
-                      className={`${css.radioIcon} ${css.off}`}
-                      iconName="radio-btn-md"
-                    />
-                  )}
-                  Irregular
-                </label>
-              </div>
-            )}
-            <div>
-              <label>
-                <Icon iconName="ua" className={css.iconFlag} /> Ukrainian
-                <Field name="ua" />
-                <ErrorMessage name="ua" component="div" className={css.error} />
+                </div>
               </label>
-              <label>
-                <Icon iconName="uk" className={css.iconFlag} /> English
-                <Field name="en" />
-                <ErrorMessage name="en" component="div" className={css.error} />
+              <label className={css.formLabel}>
+                <div className={css.inputInfo}>
+                  <Icon iconName="uk" className={css.iconFlag} />
+                  <p className={css.langText}>English</p>
+                </div>
+                <div>
+                  <Field name="en" type="text" className={css.input} />
+                  <ErrorMessage
+                    name="en"
+                    component="div"
+                    className={css.error}
+                  />
+                </div>
               </label>
             </div>
-            <div>
+            <div className={css.actionBtns}>
               <button type="submit" className={css.saveBtn}>
                 Add
               </button>
