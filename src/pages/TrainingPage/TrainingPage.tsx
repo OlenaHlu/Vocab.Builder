@@ -1,10 +1,13 @@
 import Header from "../../components/Header/Header";
+import ProgressBar from "../../components/ProgressBar/ProgressBar";
 
 const TrainingPage = () => {
   return (
     <>
       <Header />
-      <p>Training Page</p>
+      <main>
+        <ProgressBar />
+      </main>
     </>
   );
 };
