@@ -1,5 +1,6 @@
 import Header from "../../components/Header/Header";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
+import TrainingRoom from "../../components/TrainingRoom/TrainingRoom";
 
 const TrainingPage = () => {
   return (
@@ -7,6 +8,7 @@ const TrainingPage = () => {
       <Header />
       <main>
         <ProgressBar />
+        <TrainingRoom />
       </main>
     </>
   );
