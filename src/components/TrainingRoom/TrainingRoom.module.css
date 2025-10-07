@@ -2,3 +2,10 @@
   width: 28px;
   height: 28px;
 }
+
+.iconArrow {
+  fill: none;
+  stroke: var(--green);
+  width: 18px;
+  height: 18px;
+}
